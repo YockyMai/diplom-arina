@@ -1,0 +1,168 @@
+.reg-container {
+  padding: 16px;
+  min-width: 370px;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  overflow: hidden;
+}
+
+.normalInput,
+.normalInput {
+  width: 92%;
+  padding: 15px;
+  padding-left: 40px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.normalInput:focus,
+.normalInput:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.closebtn {
+  background-color: #949494;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+.closebtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+body {
+  background: linear-gradient(90deg, #f598a8, #f6edb2);
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.container p {
+  text-align: center;
+}
+
+.disableErrorPsw {
+  color: red;
+  text-align: center;
+  display: none;
+}
+
+.activeErrorPsw {
+  color: red;
+  text-align: center;
+}
+
+.Error {
+  border: 2px solid red;
+}
+
+.pswHover {
+  font-weight: bold;
+  background-color: red;
+  padding: 5px;
+  opacity: 0;
+  transition: opacity 1s;
+  border-radius: 3%;
+}
+
+.pswDivHandle:hover .pswHover {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.inputPswDiv {
+  position: relative;
+}
+
+.inputPswDiv::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: -15px;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("public/key.svg") no-repeat;
+  background-size: cover;
+}
+
+.inputRepeatPswDiv {
+  position: relative;
+}
+
+.inputRepeatPswDiv::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: -15px;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("public/key.svg") no-repeat;
+  background-size: cover;
+}
+
+.emailInputDiv {
+  position: relative;
+}
+
+.emailInputDiv::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: -15px;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("public/mail.svg") no-repeat;
+  background-size: cover;
+}
