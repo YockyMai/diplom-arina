@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import "../Registration.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, PasswordInput, Stack, Text, TextInput } from "@mantine/core";
 import { useAppDispatch } from "../../store/hooks";
 import { login } from "../../store/slices/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login({ email, password })).then(() => {
+      navigate("/");
+    });
   };
   return (
     <>

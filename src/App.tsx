@@ -10,9 +10,12 @@ import EventsPageDetailing from "./pages/EventsPageDetailing";
 import { check } from "./store/slices/userSlice";
 import MyAppointment from "./pages/MyAppointment";
 import EventsPage from "./pages/EvenetsPage";
+import MasterPage from "./pages/Master";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const isAuth = useAppSelector((state) => state.user.isAuth);
+  const role = useAppSelector((state) => state.user.user.role);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(check());
@@ -26,6 +29,12 @@ function App() {
 
           {isAuth ? (
             <>
+              {role === "MASTER" && (
+                <Route path={"/master"} element={<MasterPage />} />
+              )}
+              {role === "ADMIN" && (
+                <Route path={"/admin"} element={<AdminPage />} />
+              )}
               <Route path={"/events"} element={<EventsPage />} />
               <Route
                 path={"/events/:eventId"}

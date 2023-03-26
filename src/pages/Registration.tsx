@@ -7,6 +7,7 @@ import { register } from "../store/slices/userSlice";
 
 const Registration = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -14,7 +15,9 @@ const Registration = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    dispatch(register({ email, password, username }));
+    dispatch(register({ email, password, username })).then(() => {
+      navigate("/");
+    });
   };
   return (
     <>
@@ -55,7 +58,7 @@ const Registration = () => {
             />
 
             <Button color={"orange"} type={"submit"}>
-              Зарегестрироватся
+              Зарегистрироватся
             </Button>
 
             <Text>

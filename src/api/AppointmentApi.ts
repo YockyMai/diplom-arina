@@ -11,4 +11,7 @@ export const AppointmentApi = {
   getAllForUser() {
     return axios.get("/appointment/getAllForUser");
   },
+  getAllForMaster() {
+    return axios.get("/appointment/getAllForMaster");
+  },
 };

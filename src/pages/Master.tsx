@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import MainLayout from "../layouts/MainLayout";
 import {
-  Container,
-  createStyles,
-  ThemeIcon,
-  Title,
-  Image,
-  Text,
-  Divider,
-  rem,
-  SimpleGrid,
   Alert,
   Badge,
+  Container,
+  createStyles,
+  Divider,
+  Image,
+  rem,
+  SimpleGrid,
+  Text,
+  ThemeIcon,
+  Title,
 } from "@mantine/core";
-import { AppointmentApi } from "../api/AppointmentApi";
+import MainLayout from "../layouts/MainLayout";
 import { IAppointment } from "../types/objects/appointment";
+import { AppointmentApi } from "../api/AppointmentApi";
 import { getImageUrl } from "../libs/getImageUrl";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import { useAppSelector } from "../store/hooks";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -76,14 +77,17 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const MyAppointment = () => {
+const MasterPage = () => {
+  const user = useAppSelector((state) => state.user.user);
+
   const { classes } = useStyles();
 
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
 
   useEffect(() => {
-    AppointmentApi.getAllForUser().then(({ data }) => {
+    AppointmentApi.getAllForMaster().then(({ data }) => {
       setAppointments(data);
+      console.log(data);
     });
   }, []);
 
@@ -104,23 +108,18 @@ const MyAppointment = () => {
         </Text>
         <Text c="dimmed">{item.service.description}</Text>
         <Divider />
-        <Text>Стоимость: {item.service.price}</Text>
-        <Divider />
         <Text>
-          Вас будет принимать мастер:
-          <br /> {item.service.user.username}
+          Имя клинета:
+          <br /> {item.user.username}
         </Text>
         <Divider />
         <Text>
-          Контактный email мастера:
-          <br />{" "}
-          <a href={`mailto: ${item.service.user.email}`}>
-            {item.service.user.email}
-          </a>
+          Контактный email клиента:
+          <br /> <a href={`mailto: ${item.user.email}`}>{item.user.email}</a>
         </Text>
 
-        <Alert title={"Внимание"}>
-          Не забудьте прийти к записанной дате <br />
+        <Alert title={"Дата записи"} color={"green"}>
+          Клиент записался на дату: <br />
           <Badge>
             {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
           </Badge>
@@ -131,9 +130,11 @@ const MyAppointment = () => {
 
   return (
     <MainLayout>
-      <Container size={"lg"}>
-        <Title>Ваши записи</Title>
-
+      <Container size={"xl"}>
+        <Title mb={"md"}>Добро пожаловать {user.username}</Title>
+        <Text mb={"xl"} size={"xl"}>
+          Ваши клиенты:
+        </Text>
         <SimpleGrid
           cols={2}
           spacing={50}
@@ -147,4 +148,4 @@ const MyAppointment = () => {
   );
 };
 
-export default MyAppointment;
+export default MasterPage;
