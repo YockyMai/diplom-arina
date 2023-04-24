@@ -12,6 +12,7 @@ import MyAppointment from "./pages/MyAppointment";
 import EventsPage from "./pages/EvenetsPage";
 import MasterPage from "./pages/Master";
 import AdminPage from "./pages/AdminPage";
+import Services from "./pages/Services";
 
 function App() {
   const isAuth = useAppSelector((state) => state.user.isAuth);
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"/menu"} element={<Menu />} />
+          <Route path={"/Services"} element={<Services />} />
 
           {isAuth ? (
             <>

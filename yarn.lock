@@ -923,6 +923,13 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-hash-scroll@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/react-hash-scroll/-/react-hash-scroll-1.4.7.tgz#a6a29a9dc75aed9922cc630fff402b21167115e6"
+  integrity sha512-ysHhs92RhScjpQjG3r7QA8LHj6UANGBtIHrt424rEaZiSdlo7LLyJtAcWkuy7nqv2soTcdBGis5DVnUm5PLELQ==
+  dependencies:
+    tiny-warning "^1.0.3"
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -1095,6 +1102,11 @@ tabbable@^6.0.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.1.1.tgz#40cfead5ed11be49043f04436ef924c8890186a0"
   integrity sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg==
+
+tiny-warning@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
+  integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"

@@ -8,6 +8,7 @@ import depil from "../assets/depil.png";
 import Studio63 from "../assets/Studio63.jpg";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const MenuPage = () => {
   return (
@@ -47,15 +48,22 @@ const MenuPage = () => {
           <p>Наши услуги</p>
           <div className="services__wrapper">
             <div className="service_one">
-              <img src={depil} alt="" />
+              <Link to={"/Services#depil"}>
+                <img src={depil} alt="" />
+              </Link>
               <p>Депиляция. Воском и сахаром, Мужская и женская.</p>
             </div>
+
             <div className="service_two">
-              <img src={cosmet} alt="" />
+              <Link to={"/Services#cosmet"}>
+                <img src={cosmet} alt="" />
+              </Link>
               <p>Профессиональный уход за вашим лицом.</p>
             </div>
             <div className="service_three">
-              <img src={brovki} alt="" />
+              <Link to={"/Services#brovi"}>
+                <img src={brovki} alt="" />
+              </Link>
               <p>
                 Оформление и окрашивание бровей.
                 <br />
@@ -63,7 +71,9 @@ const MenuPage = () => {
               </p>
             </div>
             <div className="service_four">
-              <img src={nogti} alt="" />
+              <Link to={"/Services#manik"}>
+                <img src={nogti} alt="" />
+              </Link>
               <p>Маникюр, педикюр. Услуга в четыре руки</p>
             </div>
           </div>
