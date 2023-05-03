@@ -61,23 +61,39 @@ const Header = () => {
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item color={"red"} onClick={signOutFunc}>
+                <Menu.Item
+                  color={"red"}
+                  style={{ color: "#000000" }}
+                  onClick={signOutFunc}
+                >
                   Выйти
                 </Menu.Item>
                 {isAuth && (
                   <>
                     {role === "USER" && (
-                      <Menu.Item component={Link} to={"/appointment"}>
+                      <Menu.Item
+                        style={{ color: "#000000" }}
+                        component={Link}
+                        to={"/appointment"}
+                      >
                         Мои записи
                       </Menu.Item>
                     )}
                     {role === "MASTER" && (
-                      <Menu.Item component={Link} to={"/master"}>
+                      <Menu.Item
+                        style={{ color: "#000000" }}
+                        component={Link}
+                        to={"/master"}
+                      >
                         записи
                       </Menu.Item>
                     )}
                     {role === "ADMIN" && (
-                      <Menu.Item component={Link} to={"/admin"}>
+                      <Menu.Item
+                        style={{ color: "#000000" }}
+                        component={Link}
+                        to={"/admin"}
+                      >
                         Админ панель
                       </Menu.Item>
                     )}

@@ -29,7 +29,7 @@ const MainPage = () => {
               <br />
               {isAuth ? (
                 <Button color={"orange"} component={Link} to={"/events"}>
-                  Записатся на услугу
+                  Записаться на услугу
                 </Button>
               ) : (
                 <b>Чтобы записаться на услугу необходимо зарегистрироваться.</b>

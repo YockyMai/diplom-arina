@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, PasswordInput, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Button,
+  Input,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { useAppDispatch } from "../store/hooks";
 import { register } from "../store/slices/userSlice";
+import { IconPhoneCalling } from "@tabler/icons-react";
+import InputMask from "react-input-mask";
 
 const Registration = () => {
   const dispatch = useAppDispatch();
@@ -12,10 +21,11 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    dispatch(register({ email, password, username })).then(() => {
+    dispatch(register({ email, password, username, phone })).then(() => {
       navigate("/");
     });
   };
@@ -47,6 +57,19 @@ const Registration = () => {
                 setUsername(e.currentTarget.value);
               }}
             />
+
+            <Input.Wrapper label={"Телефон"} required>
+              <Input
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.currentTarget.value);
+                }}
+                component={InputMask}
+                icon={<IconPhoneCalling />}
+                mask={"+7 (999) 999 99-99"}
+                placeholder={"+7 (999) 999 99-99"}
+              />
+            </Input.Wrapper>
 
             <PasswordInput
               label={"Пароль"}

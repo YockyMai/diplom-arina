@@ -10,4 +10,5 @@ export interface IAppointment {
   serviceId: 2;
   user: IUser;
   service: IService;
+  canceled?: boolean;
 }

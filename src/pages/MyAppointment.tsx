@@ -12,12 +12,16 @@ import {
   SimpleGrid,
   Alert,
   Badge,
+  Button,
+  Group,
 } from "@mantine/core";
 import { AppointmentApi } from "../api/AppointmentApi";
 import { IAppointment } from "../types/objects/appointment";
 import { getImageUrl } from "../libs/getImageUrl";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import { useAppSelector } from "../store/hooks";
+import { showNotification } from "@mantine/notifications";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -79,13 +83,37 @@ const useStyles = createStyles((theme) => ({
 const MyAppointment = () => {
   const { classes } = useStyles();
 
+  const { role } = useAppSelector((state) => state.user.user);
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
+
+  console.log(appointments);
 
   useEffect(() => {
     AppointmentApi.getAllForUser().then(({ data }) => {
       setAppointments(data);
     });
   }, []);
+
+  const cancelAppointments = (id: number) => {
+    AppointmentApi.cancel(id)
+      .then(() => {
+        showNotification({
+          message: "Услугуа отменена",
+        });
+        setAppointments((prev) => {
+          return prev.map((item) => {
+            if (item.id === id) return { ...item, canceled: true };
+            return item;
+          });
+        });
+      })
+      .catch(() => {
+        showNotification({
+          title: "Ошибка",
+          message: "Не удалось отменить услугу, попробуйте позже",
+        });
+      });
+  };
 
   const items = appointments.map((item) => (
     <div className={classes.item} key={item.id}>
@@ -118,13 +146,39 @@ const MyAppointment = () => {
             {item.service.user.email}
           </a>
         </Text>
+        <Text>
+          Мобильный номер мастера:
+          <br />{" "}
+          <a href={`mailto: ${item.service.user.email}`}>
+            {item.service.user.phone}
+          </a>
+        </Text>
 
-        <Alert title={"Внимание"}>
-          Не забудьте прийти к записанной дате <br />
-          <Badge>
-            {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
-          </Badge>
-        </Alert>
+        {!item.canceled ? (
+          <Alert title={"Внимание"}>
+            Не забудьте прийти к записанной дате <br />
+            <Badge>
+              {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
+            </Badge>
+          </Alert>
+        ) : (
+          <Alert title={"Внимание"} color={"red"}>
+            <Text>Вы отменили данную запись</Text>
+          </Alert>
+        )}
+
+        {!item.canceled && (
+          <Group position={"right"} mt={"sm"}>
+            <Button
+              onClick={() => {
+                cancelAppointments(item.id);
+              }}
+              color={"red"}
+            >
+              Отменить запись
+            </Button>
+          </Group>
+        )}
       </div>
     </div>
   ));

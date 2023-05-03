@@ -14,4 +14,7 @@ export const AppointmentApi = {
   getAllForMaster() {
     return axios.get("/appointment/getAllForMaster");
   },
+  cancel(appointmentId: number) {
+    return axios.post("/appointment/cancel", { appointmentId });
+  },
 };

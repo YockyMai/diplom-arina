@@ -25,12 +25,21 @@ const initialState: UserState = {
 
 export const register = createAsyncThunk(
   "user/register",
-  async ({ email, password, username }: postUserData, { rejectWithValue }) => {
+  async (
+    { email, password, username, phone }: postUserData,
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.post("/user/registration", {
         email,
         password,
         username,
+        phone: phone
+          .replace("+", "")
+          .replace("(", "")
+          .replace(")", "")
+          .replace("-", "")
+          .replace(/ /g, ""),
       });
 
       if (response.status !== 200) {

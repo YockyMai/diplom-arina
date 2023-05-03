@@ -15,7 +15,7 @@ const SetUserRole = () => {
       UserApi.findAll().then(({ data }) => {
         setUsers(
           data.users.map((el) => ({
-            label: `${el.username}, ${el.role}`,
+            label: `Имя: ${el.username}, email: ${el.email}, Текущая роль: ${el.role}`,
             value: el.id.toString(),
           }))
         );

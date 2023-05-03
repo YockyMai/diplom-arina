@@ -112,18 +112,28 @@ const MasterPage = () => {
           Имя клинета:
           <br /> {item.user.username}
         </Text>
+        <Text>
+          Мобльный телефон клиента:
+          <br /> {item.user.phone}
+        </Text>
         <Divider />
         <Text>
           Контактный email клиента:
           <br /> <a href={`mailto: ${item.user.email}`}>{item.user.email}</a>
         </Text>
 
-        <Alert title={"Дата записи"} color={"green"}>
-          Клиент записался на дату: <br />
-          <Badge>
-            {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
-          </Badge>
-        </Alert>
+        {!item.canceled ? (
+          <Alert title={"Дата записи"} color={"green"}>
+            Клиент записался на дату: <br />
+            <Badge>
+              {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
+            </Badge>
+          </Alert>
+        ) : (
+          <Alert title={"Услуга отменена"} color={"red"}>
+            <Text>Клиент отменил эту услугу</Text>
+          </Alert>
+        )}
       </div>
     </div>
   ));
