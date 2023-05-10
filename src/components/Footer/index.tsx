@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import { useAppSelector } from "../../store/hooks";
 import { Link } from "react-router-dom";
-import { Center } from "@mantine/core";
 
 const Footer = () => {
   const isAuth = useAppSelector((state) => state.user.isAuth);
@@ -28,15 +27,6 @@ const Footer = () => {
               <img src="./assets/img/vk.png" alt="" width="40px" />
               <a href="https://vk.com/studio63_ufa" target="_blank">
                 ВКонтакте
-              </a>
-            </li>
-            <li>
-              <img src="./assets/img/instagram.png" alt="" width="40px" />
-              <a
-                href="https://instagram.com/studio63_ufa?igshid=YmMyMTA2M2Y="
-                target="_blank"
-              >
-                Instagram
               </a>
             </li>
             <li>

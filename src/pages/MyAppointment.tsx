@@ -14,6 +14,7 @@ import {
   Badge,
   Button,
   Group,
+  Switch,
 } from "@mantine/core";
 import { AppointmentApi } from "../api/AppointmentApi";
 import { IAppointment } from "../types/objects/appointment";
@@ -85,8 +86,20 @@ const MyAppointment = () => {
 
   const { role } = useAppSelector((state) => state.user.user);
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
+  const [filteredAppointments, setFilteredAppointments] = useState<
+    IAppointment[]
+  >([]);
+  const [withCanceled, setWithCanceled] = useState(false);
 
-  console.log(appointments);
+  useEffect(() => {
+    if (withCanceled) {
+      setFilteredAppointments(appointments);
+    } else {
+      setFilteredAppointments(
+        appointments.filter((appointment) => appointment.canceled === false)
+      );
+    }
+  }, [withCanceled, appointments]);
 
   useEffect(() => {
     AppointmentApi.getAllForUser().then(({ data }) => {
@@ -115,7 +128,7 @@ const MyAppointment = () => {
       });
   };
 
-  const items = appointments.map((item) => (
+  const items = filteredAppointments.map((item) => (
     <div className={classes.item} key={item.id}>
       <ThemeIcon
         variant="light"
@@ -186,16 +199,35 @@ const MyAppointment = () => {
   return (
     <MainLayout>
       <Container size={"lg"}>
-        <Title>Ваши записи</Title>
+        <Group position={"apart"}>
+          <Title>Ваши записи</Title>
+          <Switch
+            label={"Показать отмененные записи"}
+            checked={withCanceled}
+            onChange={(event) => setWithCanceled(event.currentTarget.checked)}
+          />
+        </Group>
 
-        <SimpleGrid
-          cols={2}
-          spacing={50}
-          breakpoints={[{ maxWidth: 550, cols: 1, spacing: 40 }]}
-          style={{ marginTop: 30 }}
-        >
-          {items}
-        </SimpleGrid>
+        {items.length > 0 ? (
+          <SimpleGrid
+            cols={2}
+            spacing={50}
+            breakpoints={[{ maxWidth: 550, cols: 1, spacing: 40 }]}
+            style={{ marginTop: 30 }}
+          >
+            {items}
+          </SimpleGrid>
+        ) : (
+          <Text
+            align={"center"}
+            size={"xl"}
+            weight={"bold"}
+            mt={"xl"}
+            color={"red"}
+          >
+            У вас нет активных записей
+          </Text>
+        )}
       </Container>
     </MainLayout>
   );
