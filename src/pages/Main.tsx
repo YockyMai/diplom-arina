@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Main.css";
 import aboutAsImg from "../assets/imgForAboutUsOne.jpg";
 import specialists from "../assets/specialists.svg";
@@ -13,6 +13,10 @@ import MainLayout from "../layouts/MainLayout";
 
 const MainPage = () => {
   const { isAuth } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   return (
     <MainLayout>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Box, Container } from "@mantine/core";

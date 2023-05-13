@@ -5,9 +5,10 @@ import depilBackground from "../assets/depilBackground.jpg";
 import cosmetBackground from "../assets/cosmetBackground.jpg";
 import brovkiBackground from "../assets/brovkiBackground.jpg";
 import manikBackground from "../assets/manikBackground.jpg";
+import pedikBackground from "../assets/pedik.jpg";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Services = () => {
   const { hash } = useLocation();
@@ -54,202 +55,158 @@ const Services = () => {
           <p>На этой странице вы узнате о каждой услуге и ее стоимости</p>
         </div>
       </div>
+
       <div id="depil" className="depilDiv">
-        <img src={depilBackground} width="1903px" alt="" />
-        <div className="depilDiv__text">
-          <h1>Депиляция</h1>
-          <p>Что это такое?</p>
-          <p>
-            Депиляция - удаление надкожной части волосяного покрова. В отличие
-            от эпиляции, депиляция не затрагивает волосяные фолликулы, в
-            результате чего естественный рост волос не нарушается, поэтому при
-            депиляции волосы удаляются временно и спустя непродолжительное время
-            отрастают вновь.
-          </p>
-        </div>
+        <img src={brovkiBackground} width="1903px" alt="" />
+        <Link to={"/events"}>
+          <div className="depilDiv__text">
+            <h1>Ресницы</h1>
+
+            <p>Что это такое?</p>
+            <p>
+              Процедура включает в себя не только увеличение объема и длины
+              ресниц, но и их окрашивание, укрепление и бережное удаление.
+              Косметолог использует только высококачественные средства и самые
+              передовые технологии, чтобы достичь идеального результата.
+            </p>
+          </div>
+        </Link>
         <div className="depilDiv__priceList">
           <h1>Стоимость услуг</h1>
           <div>
-            <p>Ваксинг ноги полностью -</p>
-            <p className="depilDiv__priceList__priceText">от 900 ₽</p>
+            <p>Окрашивание ресниц -</p>
+            <p className="depilDiv__priceList__priceText">300 ₽</p>
           </div>
           <div>
-            <p>Ваксинг область живота -</p>
-            <p className="depilDiv__priceList__priceText">от 150 ₽</p>
+            <p>Классика -</p>
+            <p className="depilDiv__priceList__priceText">1300 ₽</p>
           </div>
           <div>
-            <p>Ваксинг область лица -</p>
-            <p className="depilDiv__priceList__priceText">от 150 ₽</p>
+            <p>Ботекс ресниц -</p>
+            <p className="depilDiv__priceList__priceText">1400 ₽</p>
           </div>
           <div>
-            <p>Ваксинг подмышечных впадин -</p>
-            <p className="depilDiv__priceList__priceText">от 300 ₽</p>
+            <p>Обьем 1.5 -</p>
+            <p className="depilDiv__priceList__priceText">1400 ₽</p>
           </div>
           <div>
-            <p>Ваксинг руки полностью -</p>
-            <p className="depilDiv__priceList__priceText">от 500 ₽</p>
-          </div>
-          <div>
-            <p>Шугаринг ноги полностью -</p>
-            <p className="depilDiv__priceList__priceText">от 1000 ₽</p>
-          </div>
-          <div>
-            <p>Шугаринг область живота -</p>
-            <p className="depilDiv__priceList__priceText">от 150 ₽</p>
-          </div>
-          <div>
-            <p>Шугаринг область лица -</p>
-            <p className="depilDiv__priceList__priceText">от 150 ₽</p>
-          </div>
-          <div>
-            <p>Шугаринг подмышечных впадин -</p>
-            <p className="depilDiv__priceList__priceText">от 250 ₽</p>
-          </div>
-          <div>
-            <p>Шугаринг руки полностью -</p>
-            <p className="depilDiv__priceList__priceText">от 600 ₽</p>
+            <p>Обьем 2D -</p>
+            <p className="depilDiv__priceList__priceText">1600 ₽</p>
           </div>
         </div>
       </div>
+
       <div id="cosmet" className="cosmetDiv">
-        <img src={cosmetBackground} width="1903px" alt="" />
-        <div className="cosmetDiv__text">
-          <h1>Косметология</h1>
-          <p>Что это такое?</p>
-          <p>
-            Косметология - это лечение и восстановление эстетических проблем
-            кожи лица
-          </p>
-        </div>
+        <img src={pedikBackground} width="1903px" height={1000} alt="" />
+        <Link to={"/events"}>
+          <div className="cosmetDiv__text">
+            <h1>Педикюр</h1>
+            <p>Что это такое?</p>
+            <p>
+              Это процедура, которая не только ухаживает за ногтями и кожей
+              ступней, но и придает ощущение нежности и комфорта для всего тела.
+            </p>
+          </div>
+        </Link>
         <div className="cosmetDiv__priceList">
           <h1>Стоимость услуг</h1>
           <div>
-            <p>лифтинг - японская планцентарная косметика Curacen 2ml -</p>
-            <p className="depilDiv__priceList__priceText">от 10000 ₽</p>
+            <p>Педикюр пальчиковый / полный -</p>
+            <p className="depilDiv__priceList__priceText">1300 ₽</p>
           </div>
           <div>
-            <p>Альгинатная маска -</p>
-            <p className="depilDiv__priceList__priceText">от 900 ₽</p>
+            <p>Педикюр пальчиковый + покрытие гель-лаком -</p>
+            <p className="depilDiv__priceList__priceText">1400 ₽</p>
           </div>
           <div>
-            <p>Альгинатная маска+сыворотка -</p>
-            <p className="depilDiv__priceList__priceText">от 1000 ₽</p>
+            <p>Покрытие гель-лаком на ногах -</p>
+            <p className="depilDiv__priceList__priceText">800 ₽</p>
           </div>
           <div>
-            <p>Мезотерапия лица TEGODER -</p>
-            <p className="depilDiv__priceList__priceText">от 3500 ₽</p>
+            <p>Снятие+педикюр полный+покрытие гель-лаком -</p>
+            <p className="depilDiv__priceList__priceText">1900 ₽</p>
           </div>
           <div>
-            <p>Антивозрастной коктейль -</p>
-            <p className="depilDiv__priceList__priceText">от 2900 ₽</p>
-          </div>
-          <div>
-            <p>Лифтинг - коктейль ДМАЕ+ -</p>
-            <p className="depilDiv__priceList__priceText">от 3000 ₽</p>
+            <p>Снятие+педикюр пальчиков+покрытие гель-лаком -</p>
+            <p className="depilDiv__priceList__priceText">1500 ₽</p>
           </div>
         </div>
       </div>
       <div id="brovi" className="broviDiv">
-        <img src={brovkiBackground} width="1903px" alt="" />
-        <div className="broviDiv__text">
-          <h1>Брови/Ресницы</h1>
-          <p>Что это такое?</p>
-          <p>Уход, наращивание и окрашивание бровей и ресниц</p>
-        </div>
+        <img src={cosmetBackground} width="1903px" alt="" />
+        <Link to={"/events"}>
+          <div className="broviDiv__text">
+            <h1>Брови</h1>
+            <p>Что это такое?</p>
+            <p>
+              Процедура включает в себя не только коррекцию бровей и удаление
+              ненужных волосков, но и окрашивание, укрепление и формирование
+              бровей. В результате клиент получает идеальную форму бровей,
+              которая подчеркивает его индивидуальность и красоту.
+            </p>
+          </div>
+        </Link>
         <div className="broviDiv__priceList">
           <h1>Стоимость услуг</h1>
-          <h1>Брови</h1>
           <div>
             <p>Оформление с окрашиванием бровей (краска/хна) -</p>
-            <p className="depilDiv__priceList__priceText">от 700 ₽</p>
+            <p className="depilDiv__priceList__priceText">700 ₽</p>
           </div>
           <div>
             <p>Окрашивание бровей (краска/хна) -</p>
-            <p className="depilDiv__priceList__priceText">от 400 ₽</p>
+            <p className="depilDiv__priceList__priceText">400 ₽</p>
           </div>
           <div>
             <p>Коррекция бровей (нить/Воск,пинцет) -</p>
-            <p className="depilDiv__priceList__priceText">от 400 ₽</p>
+            <p className="depilDiv__priceList__priceText">400 ₽</p>
           </div>
           <div>
             <p>Долговременная укладка бровей "оформление" -</p>
-            <p className="depilDiv__priceList__priceText">от 1000 ₽</p>
+            <p className="depilDiv__priceList__priceText">1000 ₽</p>
           </div>
           <div>
             <p>
               Долговременная укладка бровей "оформление и окрашивание краской" -
             </p>
-            <p className="depilDiv__priceList__priceText">от 1300 ₽</p>
-          </div>
-          <h1>Ресницы</h1>
-          <div>
-            <p>Окрашивание ресниц -</p>
-            <p className="depilDiv__priceList__priceText">от 300 ₽</p>
-          </div>
-          <div>
-            <p>Ламинирование ресниц -</p>
-            <p className="depilDiv__priceList__priceText">от 1200 ₽</p>
-          </div>
-          <div>
-            <p>Ботекс ресниц -</p>
-            <p className="depilDiv__priceList__priceText">от 1400 ₽</p>
-          </div>
-          <div>
-            <p>Удаление волос над губой(нить/воск) -</p>
-            <p className="depilDiv__priceList__priceText">от 200 ₽</p>
+            <p className="depilDiv__priceList__priceText">1300 ₽</p>
           </div>
         </div>
       </div>
       <div id="manik" className="manikDiv">
         <img src={manikBackground} width="1903px" alt="" />
-        <div className="manikDiv__text">
-          <h1>Маникюр</h1>
-          <p>Что это такое?</p>
-          <p>
-            Маникюр - это косметическая процедура по обработке ногтей на пальцах
-            рук и самих кистей рук, а то и всей руки. Маникюр выполняется как в
-            салонах красоты или косметологических кабинетах квалифицированными
-            специалистами, так и в домашних условиях. Маникюр часто совмещается
-            с педикюром, уходом за кожей лица, парикмахерскими процедурами
-            (стрижка, окрашивание волос и прочие виды ухода за волосами). Часто
-            под словом «маникюр» понимают внешний вид, обработку только ногтей.
-          </p>
-        </div>
+        <Link to={"/events"}>
+          <div className="manikDiv__text">
+            <h1>Маникюр</h1>
+            <p>Что это такое?</p>
+            <p>
+              Маникюр - это косметическая процедура по обработке ногтей на
+              пальцах рук и самих кистей рук, а то и всей руки. Маникюр
+              выполняется как в салонах красоты или косметологических кабинетах
+              квалифицированными специалистами, так и в домашних условиях.
+              Маникюр часто совмещается с педикюром, уходом за кожей лица,
+              парикмахерскими процедурами (стрижка, окрашивание волос и прочие
+              виды ухода за волосами). Часто под словом «маникюр» понимают
+              внешний вид, обработку только ногтей.
+            </p>
+          </div>
+        </Link>
         <div className="manikDiv__priceList">
           <h1>Стоимость услуг</h1>
-          <h1>Маникюр</h1>
           <div>
-            <p>Маникюр комбинированный / аппаратный -</p>
-            <p className="depilDiv__priceList__priceText">от 500 ₽</p>
+            <p>Маникюр комбинированный / аппаратный - </p>
+            <p className="depilDiv__priceList__priceText">500 ₽</p>
           </div>
           <div>
             <p>Однотонное покрытие гель-лаком -</p>
-            <p className="depilDiv__priceList__priceText">от 700 ₽</p>
+            <p className="depilDiv__priceList__priceText">700 ₽</p>
           </div>
           <div>
-            <p>Однотонное покрытие + комбинированный маникюр -</p>
-            <p className="depilDiv__priceList__priceText">от 1200 ₽</p>
+            <p>Однотонное покрытие + комбинированный маникюр - </p>
+            <p className="depilDiv__priceList__priceText">1200 ₽</p>
           </div>
           <div>
             <p>Мужской маникюр -</p>
-            <p className="depilDiv__priceList__priceText">от 700 ₽</p>
-          </div>
-          <h1>Педикюр</h1>
-          <div>
-            <p>Педикюр пальчиковый / полный -</p>
-            <p className="depilDiv__priceList__priceText">от 700 ₽ / 1300 ₽</p>
-          </div>
-          <div>
-            <p>Педикюр пальчиковый + покрытие гель-лаком -</p>
-            <p className="depilDiv__priceList__priceText">от 1400 ₽</p>
-          </div>
-          <div>
-            <p>Педикюр полный + покрытие гель-лаком -</p>
-            <p className="depilDiv__priceList__priceText">от 1800 ₽</p>
-          </div>
-          <div>
-            <p>Покрытие гель-лаком на ногах -</p>
-            <p className="depilDiv__priceList__priceText">от 800 ₽</p>
+            <p className="depilDiv__priceList__priceText">700 ₽</p>
           </div>
         </div>
       </div>

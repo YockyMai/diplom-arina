@@ -3,7 +3,7 @@ import backgroundMenu from "../assets/backgroundMenu.jpg";
 import "./Menu.css";
 import nogti from "../assets/nogti.png";
 import brovki from "../assets/brovki.png";
-import cosmet from "../assets/cosmet.png";
+import resn from "../assets/resn.png";
 import depil from "../assets/depil.png";
 import Studio63 from "../assets/Studio63.jpg";
 import Header from "../components/Header";
@@ -49,32 +49,28 @@ const MenuPage = () => {
           <div className="services__wrapper">
             <div className="service_one">
               <Link to={"/Services#depil"}>
-                <img src={depil} alt="" />
+                <img src={resn} alt="" />
               </Link>
-              <p>Депиляция. Воском и сахаром, Мужская и женская.</p>
+              <p>Ресницы. Особенные техники наращивания</p>
             </div>
 
             <div className="service_two">
               <Link to={"/Services#cosmet"}>
-                <img src={cosmet} alt="" />
+                <img src={depil} alt="" />
               </Link>
-              <p>Профессиональный уход за вашим лицом.</p>
+              <p>Педикюр, уход за вашим ножками.</p>
             </div>
             <div className="service_three">
               <Link to={"/Services#brovi"}>
                 <img src={brovki} alt="" />
               </Link>
-              <p>
-                Оформление и окрашивание бровей.
-                <br />
-                Ламинирование/ботокс и наращивание ресниц
-              </p>
+              <p>Оформление и окрашивание бровей.</p>
             </div>
             <div className="service_four">
               <Link to={"/Services#manik"}>
                 <img src={nogti} alt="" />
               </Link>
-              <p>Маникюр, педикюр. Услуга в четыре руки</p>
+              <p>Маникюр. Услуга в четыре руки</p>
             </div>
           </div>
         </div>

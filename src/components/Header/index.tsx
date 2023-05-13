@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import logoSrc from "../../assets/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Text, Menu, UnstyledButton } from "@mantine/core";
 import { signOut } from "../../store/slices/userSlice";
@@ -18,6 +18,40 @@ const Header = () => {
     navigate("/");
   };
 
+  const { hash } = useLocation();
+
+  function smoothScrollTo(targetY: number, duration: number) {
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    let startTime: any = null;
+
+    function scrollStep(timestamp: any) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const scrollTop = startY + distance * progress;
+      window.scrollTo(0, scrollTop);
+      if (progress < 1) window.requestAnimationFrame(scrollStep);
+    }
+
+    window.requestAnimationFrame(scrollStep);
+  }
+
+  useEffect(() => {
+    const scrollDuration = 500;
+    if (hash === "#about") {
+      smoothScrollTo(1100, scrollDuration);
+    }
+    if (hash === "#services") {
+      smoothScrollTo(1800, scrollDuration);
+    }
+    if (hash === "#footer") {
+      smoothScrollTo(4200, scrollDuration);
+    }
+    if (!hash) {
+      smoothScrollTo(0, scrollDuration);
+    }
+  }, [hash]);
+
   return (
     <div className="header">
       <div className="container">
@@ -31,27 +65,27 @@ const Header = () => {
           <Link to={"/Menu"} style={{ color: "#FFF" }}>
             Главная
           </Link>
-          <a
+          <Link
             style={{ color: "#FFF" }}
             className={"header__links"}
-            href="/Menu#about"
+            to="/Menu#about"
           >
             О нас
-          </a>
-          <a
+          </Link>
+          <Link
             style={{ color: "#FFF" }}
             className={"header__links"}
-            href="/Menu#services"
+            to={"/Menu#services"}
           >
             Услуги и цены
-          </a>
-          <a
+          </Link>
+          <Link
             style={{ color: "#FFF" }}
             className={"header__links"}
-            href="/Menu#footer"
+            to={"/Menu#footer"}
           >
             Контакты
-          </a>
+          </Link>
           {isAuth ? (
             <Menu shadow="md" width={200}>
               <Menu.Target>
