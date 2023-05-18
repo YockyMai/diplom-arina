@@ -32,7 +32,7 @@ const MainPage = () => {
               <br />
               <br />
               {isAuth ? (
-                <Button color={"orange"} component={Link} to={"/events"}>
+                <Button color={"pink"} component={Link} to={"/events"}>
                   Записаться на услугу
                 </Button>
               ) : (

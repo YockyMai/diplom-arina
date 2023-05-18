@@ -2,27 +2,25 @@ import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import {
   Alert,
-  Box,
   Button,
   Center,
   Container,
-  Group,
   Image,
-  Loader,
   Mark,
+  SimpleGrid,
   Stack,
   Text,
   Title,
 } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { ServiceApi } from "../api/ServiceApi";
-import { IService } from "../types/objects/service";
+import { IService, Time } from "../types/objects/service";
 import { getImageUrl } from "../libs/getImageUrl";
-import { DatePicker, DateTimePicker } from "@mantine/dates";
 import "dayjs/locale/ru";
 import { showNotification } from "@mantine/notifications";
 import { AppointmentApi } from "../api/AppointmentApi";
 import { useAppSelector } from "../store/hooks";
+import { MyDatePicker } from "../components/DatePicker";
 
 const EventsPageDetailing = () => {
   const userId = useAppSelector((state) => state.user.user.id);
@@ -31,12 +29,15 @@ const EventsPageDetailing = () => {
   const [date, setDate] = useState<Date | null>(null);
 
   const [service, setService] = useState<IService | null>(null);
+  const [selectedDayId, setSelectedDayId] = useState<number | null>(null);
+  const [selectedTimeId, setSelectedTimeId] = useState<null | number>(null);
 
   useEffect(() => {
     if (eventId !== undefined) {
       ServiceApi.getOne(Number(eventId))
         .then(({ data }) => {
           setService(data);
+          setSelectedDayId(data.calendars[0].days[0].id);
         })
         .catch(() => {
           setService(null);
@@ -55,11 +56,20 @@ const EventsPageDetailing = () => {
 
   const onSubmit = async () => {
     try {
-      if (date === null) {
-        showNotification({ color: "red", message: "Выберите дату записи" });
+      if (!selectedDayId) {
+        showNotification({ color: "red", message: "Выберите день записи" });
         return;
       }
-      await AppointmentApi.create(service.id, date, userId);
+      if (!selectedTimeId) {
+        showNotification({ color: "red", message: "Выберите время записи" });
+        return;
+      }
+      await AppointmentApi.create(
+        service.id,
+        selectedDayId,
+        selectedTimeId,
+        userId
+      );
       showNotification({
         color: "green",
         title: "Вы успешно записались",
@@ -77,41 +87,51 @@ const EventsPageDetailing = () => {
   return (
     <MainLayout>
       <Container size={"xl"}>
-        <Title>
-          Услуга <Mark color={"pink"}>{service.name}</Mark>
-        </Title>
-        <Text size={"xl"}>Описание: {service.description}</Text>
-
-        <Stack pt={"xl"}>
+        <SimpleGrid
+          breakpoints={[{ cols: 1, maxWidth: "sm" }]}
+          cols={2}
+          my={"xl"}
+          pt={"xl"}
+        >
           <Image
             src={getImageUrl(service.img)}
             width={"100%"}
-            height={200}
-            sx={{ borderRadius: "50px", overflow: "hidden" }}
+            height={"auto"}
+            fit={"contain"}
           />
 
-          <Alert sx={{ width: "100%" }} title={"Запись"} color={"orange"}>
-            <Text>Запишитесь на нашу услугу, заполнив поля ниже</Text>
-          </Alert>
-
-          <Center>
-            <Stack>
-              <DateTimePicker
-                label={"Дата и время записи"}
-                placeholder={"Выберите удобную для вас дату записи"}
-                color={"blue"}
-                minDate={new Date()}
-                onChange={setDate}
-                value={date}
-                locale={"ru"}
+          <Stack>
+            <Title>
+              Услуга <Mark color={"pink"}>{service.name}</Mark>
+            </Title>
+            <Text size={"xl"}>Описание: {service.description}</Text>
+          </Stack>
+        </SimpleGrid>
+        <Alert
+          mb={"xl"}
+          sx={{ width: "100%" }}
+          title={"Запись"}
+          color={"orange"}
+        >
+          <Text>Запишитесь на нашу услугу, заполнив поля ниже</Text>
+        </Alert>
+        <Center>
+          <Stack>
+            {selectedDayId && (
+              <MyDatePicker
+                selectedTimeId={selectedTimeId}
+                setSelectedTimeId={setSelectedTimeId}
+                selectedDayId={selectedDayId}
+                setSelectedDayId={setSelectedDayId}
+                days={service.calendars[0].days}
               />
-              <Text>
-                Стоимость услуги составит : <Mark>{service.price}</Mark> рублей.
-              </Text>
-              <Button onClick={onSubmit}>Записаться</Button>
-            </Stack>
-          </Center>
-        </Stack>
+            )}
+            <Text>
+              Стоимость услуги составит : <Mark>{service.price}</Mark> рублей.
+            </Text>
+            <Button onClick={onSubmit}>Записаться</Button>
+          </Stack>
+        </Center>
       </Container>
     </MainLayout>
   );

@@ -15,6 +15,8 @@ import {
   Button,
   Group,
   Switch,
+  Modal,
+  Stack,
 } from "@mantine/core";
 import { AppointmentApi } from "../api/AppointmentApi";
 import { IAppointment } from "../types/objects/appointment";
@@ -106,26 +108,36 @@ const MyAppointment = () => {
       setAppointments(data);
     });
   }, []);
+  const [confirmCancelModal, setConfirmCancelModal] = useState(false);
+  const [cancelAppointmentId, setCancelAppointmentId] = useState<null | number>(
+    null
+  );
 
-  const cancelAppointments = (id: number) => {
-    AppointmentApi.cancel(id)
-      .then(() => {
-        showNotification({
-          message: "Услугуа отменена",
-        });
-        setAppointments((prev) => {
-          return prev.map((item) => {
-            if (item.id === id) return { ...item, canceled: true };
-            return item;
+  const cancelAppointments = () => {
+    if (cancelAppointmentId)
+      AppointmentApi.cancel(cancelAppointmentId)
+        .then(() => {
+          showNotification({
+            message: "Услугуа отменена ",
           });
+          setAppointments((prev) => {
+            return prev.map((item) => {
+              if (item.id === cancelAppointmentId)
+                return { ...item, canceled: true };
+              return item;
+            });
+          });
+        })
+        .catch(() => {
+          showNotification({
+            title: "Ошибка",
+            message: "Не удалось отменить услугу, попробуйте позже",
+          });
+        })
+        .finally(() => {
+          setConfirmCancelModal(false);
+          setCancelAppointmentId(null);
         });
-      })
-      .catch(() => {
-        showNotification({
-          title: "Ошибка",
-          message: "Не удалось отменить услугу, попробуйте позже",
-        });
-      });
   };
 
   const items = filteredAppointments.map((item) => (
@@ -184,7 +196,8 @@ const MyAppointment = () => {
           <Group position={"right"} mt={"sm"}>
             <Button
               onClick={() => {
-                cancelAppointments(item.id);
+                setConfirmCancelModal(true);
+                setCancelAppointmentId(item.id);
               }}
               color={"red"}
             >
@@ -229,6 +242,39 @@ const MyAppointment = () => {
           </Text>
         )}
       </Container>
+      <Modal
+        centered
+        opened={confirmCancelModal}
+        onClose={() => {
+          setConfirmCancelModal(false);
+        }}
+        title={"ㅤ"}
+      >
+        <Alert color={"red"}>
+          <Stack>
+            <Text
+              sx={{ width: "100%" }}
+              size={"lg"}
+              weight={"bold"}
+              color={"red"}
+              align={"center"}
+            >
+              Вы уверены что хотите отменить запись?
+            </Text>
+            <Text align={"center"}>
+              Отменить данное действие будет невозможно
+            </Text>
+            <Button
+              color={"red"}
+              onClick={() => {
+                cancelAppointments();
+              }}
+            >
+              Отменить запись
+            </Button>
+          </Stack>
+        </Alert>
+      </Modal>
     </MainLayout>
   );
 };
