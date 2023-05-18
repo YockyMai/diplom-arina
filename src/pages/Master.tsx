@@ -126,7 +126,7 @@ const MasterPage = () => {
           <Alert title={"Дата записи"} color={"green"}>
             Клиент записался на дату: <br />
             <Badge>
-              {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
+              {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Badge>
           </Alert>
         ) : (

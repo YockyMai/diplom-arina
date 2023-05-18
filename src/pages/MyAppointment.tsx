@@ -183,7 +183,7 @@ const MyAppointment = () => {
           <Alert title={"Внимание"}>
             Не забудьте прийти к записанной дате <br />
             <Badge>
-              {dayjs(item.date).locale("ru").format("D MMMM в HH:mm")}
+              {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Badge>
           </Alert>
         ) : (
