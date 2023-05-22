@@ -113,7 +113,7 @@ const MasterPage = () => {
           <br /> {item.user.username}
         </Text>
         <Text>
-          Мобльный телефон клиента:
+          Мобильный телефон клиента:
           <br /> {item.user.phone}
         </Text>
         <Divider />
