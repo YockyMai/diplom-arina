@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import {
   Alert,
+  Box,
   Button,
   Center,
   Container,
+  Divider,
+  Group,
   Image,
   Mark,
   SimpleGrid,
@@ -98,21 +101,32 @@ const EventsPageDetailing = () => {
             width={"100%"}
             height={"auto"}
             fit={"contain"}
+            sx={(theme) => ({
+              borderRadius: theme.radius.sm,
+              overflow: "hidden",
+            })}
           />
 
           <Stack>
-            <Title>
-              Услуга <Mark color={"pink"}>{service.name}</Mark>
-            </Title>
-            <Text size={"xl"}>Описание: {service.description}</Text>
+            <Group position={"apart"}>
+              <Title order={1}>{service.name}</Title>
+            </Group>
+            <Box
+              sx={(theme) => ({
+                borderRadius: theme.radius.sm,
+                backgroundColor: theme.colors.gray[1],
+                backdropFilter: "blur(0.8)",
+              })}
+              p={"xl"}
+            >
+              <Text size={"lg"} align={"center"}>
+                Описание
+              </Text>
+              <Text color={"dimmed"}>{service.description}</Text>
+            </Box>
           </Stack>
         </SimpleGrid>
-        <Alert
-          mb={"xl"}
-          sx={{ width: "100%" }}
-          title={"Запись"}
-          color={"orange"}
-        >
+        <Alert mb={"xl"} sx={{ width: "100%" }} title={"Запись"} color={"gray"}>
           <Text>Запишитесь на нашу услугу, заполнив поля ниже</Text>
         </Alert>
         <Center>
@@ -129,7 +143,9 @@ const EventsPageDetailing = () => {
             <Text>
               Стоимость услуги составит : <Mark>{service.price}</Mark> рублей.
             </Text>
-            <Button onClick={onSubmit}>Записаться</Button>
+            <Button color={"indigo"} onClick={onSubmit}>
+              Записаться
+            </Button>
           </Stack>
         </Center>
       </Container>

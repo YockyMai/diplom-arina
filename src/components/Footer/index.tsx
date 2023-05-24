@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { useAppSelector } from "../../store/hooks";
 import { BsTelegram, TbBrandVk } from "react-icons/all";
+import { useTheme } from "@emotion/react";
 
 const Footer = () => {
   const isAuth = useAppSelector((state) => state.user.isAuth);

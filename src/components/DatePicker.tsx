@@ -36,7 +36,7 @@ export const MyDatePicker: FC<Props> = ({
   };
 
   return (
-    <Alert title={"Выберите дату для записи"} color={"pink"}>
+    <Alert title={"Выберите дату для записи"} color={"indigo"}>
       <Box sx={{ maxWidth: 400 }}>
         <Carousel
           height={40}
@@ -49,7 +49,7 @@ export const MyDatePicker: FC<Props> = ({
             <Carousel.Slide key={day.id}>
               <Button
                 onClick={() => onDayChange(day.id)}
-                color={selectedDayId === day.id ? "teal" : "pink"}
+                color={selectedDayId === day.id ? "indigo" : "gray"}
               >
                 {dayjs(day.day).locale("ru").format("D MMMM")}
               </Button>
@@ -57,7 +57,7 @@ export const MyDatePicker: FC<Props> = ({
           ))}
         </Carousel>
       </Box>
-      <Text align={"center"} mt={"xl"} color={"orange"}>
+      <Text align={"center"} mt={"xl"} color={"indigo"}>
         Выберите время
       </Text>
       <SimpleGrid p={"sm"} cols={3}>
@@ -65,7 +65,7 @@ export const MyDatePicker: FC<Props> = ({
           <Button
             key={timeObj.id}
             onClick={() => onTimeSelect(timeObj.id)}
-            color={selectedTimeId === timeObj.id ? "teal" : "pink"}
+            color={selectedTimeId === timeObj.id ? "indigo" : "gray"}
           >
             {timeObj.time}
           </Button>

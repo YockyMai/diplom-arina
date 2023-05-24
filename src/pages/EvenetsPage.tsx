@@ -27,6 +27,8 @@ const EventsPage = () => {
           {services.map((service) => (
             <Grid.Col span={4}>
               <ServiceCard
+                description={service.description}
+                price={service.price}
                 image={service.img}
                 title={service.name}
                 id={service.id}

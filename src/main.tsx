@@ -9,7 +9,14 @@ import { Notifications } from "@mantine/notifications";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        fontFamily: "Rubik, sans-serif",
+        headings: { fontFamily: "Rubik, sans-serif" },
+      }}
+    >
       <Provider store={store}>
         <App />
       </Provider>
