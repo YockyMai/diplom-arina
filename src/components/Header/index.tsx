@@ -83,6 +83,13 @@ const Header = () => {
           >
             Контакты
           </Link>
+          <Link
+            style={{ color: "#FFF" }}
+            className={"header__links"}
+            to={"/masters"}
+          >
+            Мастера
+          </Link>
           {isAuth ? (
             <Menu shadow="md" width={200}>
               <Menu.Target>
