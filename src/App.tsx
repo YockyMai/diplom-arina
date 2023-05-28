@@ -13,6 +13,7 @@ import EventsPage from "./pages/EvenetsPage";
 import MasterPage from "./pages/Master";
 import AdminPage from "./pages/AdminPage";
 import Services from "./pages/Services";
+import MastersPage from "./pages/Masters";
 
 function App() {
   const isAuth = useAppSelector((state) => state.user.isAuth);
@@ -28,6 +29,7 @@ function App() {
           <Route path={"/"} element={<Main />} />
           <Route path={"/menu"} element={<Menu />} />
           <Route path={"/Services"} element={<Services />} />
+          <Route path={"/masters"} element={<MastersPage />} />
 
           {isAuth ? (
             <>

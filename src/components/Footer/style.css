@@ -2,7 +2,7 @@
   width: 100%;
   color: white;
   padding-bottom: 50px;
-  background-color: #cbcbcb;
+  background-color: #B49284;
 }
 
 .contacs p:first-child {
@@ -34,7 +34,7 @@
 
 
 .social svg {
-  color: #5d9bde;
+  color: #ffffff;
   margin-top: 5px;
   margin-right: 10px;
   font-size: 24px;
@@ -53,7 +53,7 @@
   display: flex;
   justify-content: space-between;
   width: 70%;
-  margin: 100px auto 0 auto;
+  margin: 0 auto;
   flex-wrap: wrap;
 }
 

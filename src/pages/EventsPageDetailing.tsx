@@ -15,7 +15,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ServiceApi } from "../api/ServiceApi";
 import { IService, Time } from "../types/objects/service";
 import { getImageUrl } from "../libs/getImageUrl";
@@ -28,8 +28,6 @@ import { MyDatePicker } from "../components/DatePicker";
 const EventsPageDetailing = () => {
   const userId = useAppSelector((state) => state.user.user.id);
   const { eventId } = useParams();
-
-  const [date, setDate] = useState<Date | null>(null);
 
   const [service, setService] = useState<IService | null>(null);
   const [selectedDayId, setSelectedDayId] = useState<number | null>(null);
@@ -89,7 +87,7 @@ const EventsPageDetailing = () => {
 
   return (
     <MainLayout>
-      <Container size={"xl"}>
+      <Container py={100} size={"xl"}>
         <SimpleGrid
           breakpoints={[{ cols: 1, maxWidth: "sm" }]}
           cols={2}
@@ -114,21 +112,25 @@ const EventsPageDetailing = () => {
             <Box
               sx={(theme) => ({
                 borderRadius: theme.radius.sm,
-                backgroundColor: theme.colors.gray[1],
-                backdropFilter: "blur(0.8)",
+                backgroundColor: "#B49385",
+                overflow: "hidden",
               })}
-              p={"xl"}
             >
-              <Text size={"lg"} align={"center"}>
+              <Text
+                size={"lg"}
+                sx={{ backgroundColor: "#856d62" }}
+                py={"lg"}
+                color={"#FFF"}
+                align={"center"}
+              >
                 Описание
               </Text>
-              <Text color={"dimmed"}>{service.description}</Text>
+              <Text p={"xl"} color={"#FFF"}>
+                {service.description}
+              </Text>
             </Box>
           </Stack>
         </SimpleGrid>
-        <Alert mb={"xl"} sx={{ width: "100%" }} title={"Запись"} color={"gray"}>
-          <Text>Запишитесь на нашу услугу, заполнив поля ниже</Text>
-        </Alert>
         <Center>
           <Stack>
             {selectedDayId && (
@@ -140,10 +142,29 @@ const EventsPageDetailing = () => {
                 days={service.calendars[0].days}
               />
             )}
-            <Text>
-              Стоимость услуги составит : <Mark>{service.price}</Mark> рублей.
+            <Text color={"#B49385"}>
+              Стоимость услуги составит : {service.price} рублей.
             </Text>
-            <Button color={"indigo"} onClick={onSubmit}>
+
+            <Button
+              radius={0}
+              p={"xl"}
+              size={"xl"}
+              style={{ flex: 1, borderColor: "#B49284" }}
+              sx={{
+                color: "#B49284",
+                width: "100%",
+                transition: "0.3s",
+                ":hover": {
+                  backgroundColor: "#B49284",
+                  color: "#FFF",
+                  transition: "0.3s",
+                },
+              }}
+              variant={"outline"}
+              color={"indigo"}
+              onClick={onSubmit}
+            >
               Записаться
             </Button>
           </Stack>

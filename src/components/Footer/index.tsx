@@ -9,15 +9,7 @@ const Footer = () => {
   return (
     <div id="footer" className="footer">
       <div className="info">
-        <div className={"map"}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2303.725158641774!2d55.938071216049345!3d54.732049077715146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43d93a67de6d954d%3A0x8cf8a4c918d85972!2z0YPQuy4g0JPQvtCz0L7Qu9GPLCA2My8xLCDQo9GE0LAsINCg0LXRgdC_LiDQkdCw0YjQutC-0YDRgtC-0YHRgtCw0L0sIDQ1MDA3Ng!5e0!3m2!1sru!2sru!4v1663940063896!5m2!1sru!2sru"
-            width="600"
-            height="450"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
+        <div className={"map"}></div>
         <div className="contacs">
           <p>Контакты:</p>
           <p>Адрес: ул. Гоголя 63/1</p>

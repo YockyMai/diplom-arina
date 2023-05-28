@@ -29,8 +29,10 @@ const AdminPage = () => {
 
   return (
     <MainLayout>
-      <Container size={"xl"}>
-        <Title>Панель администратора</Title>
+      <Container mb={300} size={"xl"}>
+        <Title align={"center"} mt={150}>
+          Панель администратора
+        </Title>
 
         <Container mt={"xl"} size={"xs"}>
           <Stack>

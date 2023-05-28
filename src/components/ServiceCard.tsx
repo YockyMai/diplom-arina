@@ -5,6 +5,7 @@ import {
   Divider,
   Group,
   Image,
+  Stack,
   Text,
   Title,
 } from "@mantine/core";
@@ -20,50 +21,41 @@ interface ServiceCardProps {
   price: string;
 }
 
-const ServiceCard: FC<ServiceCardProps> = ({
-  title,
-  image,
-  id,
-  description,
-}) => {
+const ServiceCard: FC<ServiceCardProps> = ({ title, image, id, price }) => {
   return (
-    <Card
-      sx={(theme) => ({ backgroundColor: theme.colors.gray[4] })}
-      radius="md"
-      p="md"
-    >
+    <Card>
       <Card.Section>
-        <Image src={getImageUrl(image)} alt={title} height={280} />
+        <Image
+          src={getImageUrl(image)}
+          sx={{ overflow: "hidden", borderRadius: "0.5em" }}
+          alt={title}
+          height={350}
+        />
       </Card.Section>
 
-      <Card.Section mt="md">
-        <Text align={"center"}>{title}</Text>
+      <Card.Section mt={"xl"}>
+        <Text weight={200} size={28} color={"#B49284"}>
+          {title}
+        </Text>
       </Card.Section>
       <Card.Section mt="md">
-        <Box
-          sx={(theme) => ({
-            textOverflow: "ellipsis",
-            lineClamp: 3,
-            backgroundColor: theme.colors.gray[5],
-          })}
-          p={"xl"}
-        >
-          <Title order={4}>Описание :</Title>
-          <Text>{description}</Text>
-        </Box>
-      </Card.Section>
-
-      <Group mt="xl">
+        <Text weight={200} size={28} color={"#B49284"}>
+          {price}руб.
+        </Text>
         <Button
+          mt={"sm"}
           component={Link}
           to={`/events/${id}`}
-          radius="md"
-          style={{ flex: 1 }}
-          color={"indigo"}
+          radius={0}
+          size={"xl"}
+          mb={10}
+          style={{ flex: 1, borderColor: "#B49284" }}
+          sx={{ color: "#B49284", width: "100%" }}
+          variant={"outline"}
         >
           Подробнее
         </Button>
-      </Group>
+      </Card.Section>
     </Card>
   );
 };

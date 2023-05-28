@@ -21,8 +21,8 @@ const EventsPage = () => {
 
   return (
     <MainLayout>
-      <Container size={"xl"}>
-        <Title>Наши услуги</Title>
+      <Container my={150} size={"xl"}>
+        <Title mb={"xl"}>Наши услуги</Title>
         <Grid>
           {services.map((service) => (
             <Grid.Col span={4}>

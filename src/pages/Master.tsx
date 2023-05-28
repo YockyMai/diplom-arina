@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Badge,
+  Box,
+  Button,
   Container,
   createStyles,
   Divider,
+  Group,
   Image,
   rem,
   SimpleGrid,
+  Stack,
   Text,
   ThemeIcon,
   Title,
@@ -92,61 +96,47 @@ const MasterPage = () => {
   }, []);
 
   const items = appointments.map((item) => (
-    <div className={classes.item} key={item.id}>
-      <ThemeIcon
-        variant="light"
-        className={classes.itemIcon}
-        size={60}
-        radius="md"
+    <div style={{ borderRadius: "0.3em", overflow: "hidden" }}>
+      <Image src={getImageUrl(item.service.img)} />
+      <Box
+        p={"md"}
+        pt={"sm"}
+        sx={(theme) => ({ backgroundColor: "rgba(180,146,132,0.3)" })}
+        key={item.id}
       >
-        <Image src={getImageUrl(item.service.img)} />
-      </ThemeIcon>
-
-      <div>
-        <Text fw={700} fz="lg" className={classes.itemTitle}>
-          Наименование услуги: {item.service.name}
-        </Text>
-        <Text c="dimmed">{item.service.description}</Text>
-        <Divider />
-        <Text>
-          Имя клинета:
-          <br /> {item.user.username}
-        </Text>
-        <Text>
-          Мобильный телефон клиента:
-          <br /> {item.user.phone}
-        </Text>
-        <Divider />
-        <Text>
-          Контактный email клиента:
-          <br /> <a href={`mailto: ${item.user.email}`}>{item.user.email}</a>
-        </Text>
-
-        {!item.canceled ? (
-          <Alert title={"Дата записи"} color={"green"}>
-            Клиент записался на дату: <br />
-            <Badge>
+        <div>
+          <Group position={"apart"}>
+            <Text>Услуга:</Text>
+            <Text color={"#B49284"}>{item.service.name}</Text>
+          </Group>
+          <Divider mb={"xl"} mt={-3} variant={"dashed"} />
+          <Group position={"apart"}>
+            <Text>Дата записи:</Text>
+            <Text color={"#B49284"}>
               {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
-            </Badge>
-          </Alert>
-        ) : (
-          <Alert title={"Услуга отменена"} color={"red"}>
-            <Text>Клиент отменил эту услугу</Text>
-          </Alert>
-        )}
-      </div>
+            </Text>
+          </Group>
+          <Divider mb={"xl"} mt={-3} variant={"dashed"} />
+          <Group position={"apart"}>
+            <Text>Имя клиента:</Text>
+
+            <Text color={"#B49284"}>{item.user.username}</Text>
+          </Group>
+          <Divider mb={"xl"} mt={-3} variant={"dashed"} />
+        </div>
+      </Box>
     </div>
   ));
 
   return (
     <MainLayout>
-      <Container size={"xl"}>
+      <Container my={150} size={"xl"}>
         <Title mb={"md"}>Добро пожаловать {user.username}</Title>
         <Text mb={"xl"} size={"xl"}>
           Ваши клиенты:
         </Text>
         <SimpleGrid
-          cols={2}
+          cols={3}
           spacing={50}
           breakpoints={[{ maxWidth: 550, cols: 1, spacing: 40 }]}
           style={{ marginTop: 30 }}

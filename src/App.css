@@ -40,11 +40,6 @@ body {
 }
 
 
-.our__services img {
-  width: 150px;
-  margin-left: 80px;
-}
-
 .services__wrapper {
   display: flex;
   margin: 0 50px;

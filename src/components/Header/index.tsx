@@ -39,10 +39,10 @@ const Header = () => {
   useEffect(() => {
     const scrollDuration = 500;
     if (hash === "#about") {
-      smoothScrollTo(1100, scrollDuration);
+      smoothScrollTo(0, scrollDuration);
     }
     if (hash === "#services") {
-      smoothScrollTo(1800, scrollDuration);
+      smoothScrollTo(500, scrollDuration);
     }
     if (hash === "#footer") {
       smoothScrollTo(4200, scrollDuration);
@@ -62,9 +62,6 @@ const Header = () => {
           </div>
         </Link>
         <div className="header__menu">
-          <Link to={"/Menu"} style={{ color: "#FFF" }}>
-            Главная
-          </Link>
           <Link
             style={{ color: "#FFF" }}
             className={"header__links"}
@@ -90,7 +87,9 @@ const Header = () => {
             <Menu shadow="md" width={200}>
               <Menu.Target>
                 <UnstyledButton>
-                  <Text color={"#FFFFFF"}>{user.username}</Text>
+                  <Text sx={{ whiteSpace: "nowrap" }} color={"#FFFFFF"}>
+                    {user.username}
+                  </Text>
                 </UnstyledButton>
               </Menu.Target>
 

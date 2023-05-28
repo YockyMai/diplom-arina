@@ -48,11 +48,7 @@ const MyAppointment = () => {
             message: "Услугуа отменена ",
           });
           setAppointments((prev) => {
-            return prev.map((item) => {
-              if (item.id === cancelAppointmentId)
-                return { ...item, canceled: true };
-              return item;
-            });
+            return prev.filter((item) => item.id !== cancelAppointmentId);
           });
         })
         .catch(() => {
@@ -68,12 +64,12 @@ const MyAppointment = () => {
   };
 
   const items = appointments.map((item) => (
-    <div>
+    <div style={{ borderRadius: "0.3em", overflow: "hidden" }}>
       <Image src={getImageUrl(item.service.img)} />
       <Box
         p={"md"}
         pt={"sm"}
-        sx={(theme) => ({ backgroundColor: theme.colors.gray[3] })}
+        sx={(theme) => ({ backgroundColor: "rgba(180,146,132,0.3)" })}
         key={item.id}
       >
         <div>
@@ -82,7 +78,7 @@ const MyAppointment = () => {
           </Text>
           <Group mt={"sm"} position={"apart"}>
             <Text>Стоимость:</Text>
-            <Text color={"indigo"} weight={"bold"} size={"lg"}>
+            <Text color={"#B49284"} weight={"bold"} size={"lg"}>
               {item.service.price}₽
             </Text>
           </Group>
@@ -90,27 +86,44 @@ const MyAppointment = () => {
 
           <Group position={"apart"}>
             <Text>Дата записи:</Text>
-            <Text color={"indigo"}>
+            <Text color={"#B49284"}>
               {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
-          <Alert title={"Ваш мастер:"} color={"indigo"}>
-            {item.service.user.username}
-          </Alert>
+          <Group position={"apart"}>
+            <Text>Ваш мастер:</Text>
 
+            <Text color={"#B49284"}>{item.service.user.username}</Text>
+          </Group>
+          <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           {!item.canceled && (
-            <Group position={"right"} mt={"sm"}>
+            <Stack>
               <Button
+                radius={0}
+                p={"xl"}
+                size={"xl"}
+                style={{ flex: 1, borderColor: "#B49284" }}
+                sx={{
+                  color: "#B49284",
+                  width: "100%",
+                  transition: "0.3s",
+                  ":hover": {
+                    backgroundColor: "#B49284",
+                    color: "#FFF",
+                    transition: "0.3s",
+                  },
+                }}
+                variant={"outline"}
+                color={"indigo"}
                 onClick={() => {
                   setConfirmCancelModal(true);
                   setCancelAppointmentId(item.id);
                 }}
-                color={"red"}
               >
                 Отменить запись
               </Button>
-            </Group>
+            </Stack>
           )}
         </div>
       </Box>
@@ -119,7 +132,7 @@ const MyAppointment = () => {
 
   return (
     <MainLayout>
-      <Container size={"lg"}>
+      <Container py={150} size={"xl"}>
         <Group position={"apart"}>
           <Title>Ваши записи</Title>
         </Group>
@@ -152,30 +165,43 @@ const MyAppointment = () => {
           setConfirmCancelModal(false);
         }}
       >
-        <Alert color={"red"}>
-          <Stack>
-            <Text
-              sx={{ width: "100%" }}
-              size={"lg"}
-              weight={"bold"}
-              color={"red"}
-              align={"center"}
-            >
-              Вы уверены что хотите отменить запись?
-            </Text>
-            <Text align={"center"}>
-              Отменить данное действие будет невозможно
-            </Text>
-            <Button
-              color={"red"}
-              onClick={() => {
-                cancelAppointments();
-              }}
-            >
-              Отменить запись
-            </Button>
-          </Stack>
-        </Alert>
+        <Stack>
+          <Text
+            sx={{ width: "100%" }}
+            size={"lg"}
+            weight={"bold"}
+            color={"#B49284"}
+            align={"center"}
+          >
+            Вы уверены что хотите отменить запись?
+          </Text>
+          <Text align={"center"}>
+            Отменить данное действие будет невозможно
+          </Text>
+          <Button
+            radius={0}
+            p={"xl"}
+            size={"xl"}
+            style={{ flex: 1, borderColor: "#B49284" }}
+            sx={{
+              color: "#B49284",
+              width: "100%",
+              transition: "0.3s",
+              ":hover": {
+                backgroundColor: "#B49284",
+                color: "#FFF",
+                transition: "0.3s",
+              },
+            }}
+            variant={"outline"}
+            color={"indigo"}
+            onClick={() => {
+              cancelAppointments();
+            }}
+          >
+            Отменить запись
+          </Button>
+        </Stack>
       </Modal>
     </MainLayout>
   );

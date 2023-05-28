@@ -1,7 +1,7 @@
-import { Alert, Box, Button, SimpleGrid, Text } from "@mantine/core";
+import { Alert, Box, Button, SimpleGrid, Text, Title } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { Day, Time } from "../types/objects/service";
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 
@@ -36,7 +36,13 @@ export const MyDatePicker: FC<Props> = ({
   };
 
   return (
-    <Alert title={"Выберите дату для записи"} color={"indigo"}>
+    <Box
+      sx={{ backgroundColor: "rgba(180,146,132,0.2)", borderRadius: "0.3em" }}
+      p={"xl"}
+    >
+      <Title py={"sm"} order={5} color={"#B49284"}>
+        Выберите дату для записи
+      </Title>
       <Box sx={{ maxWidth: 400 }}>
         <Carousel
           height={40}
@@ -48,8 +54,25 @@ export const MyDatePicker: FC<Props> = ({
           {days.map((day) => (
             <Carousel.Slide key={day.id}>
               <Button
+                radius={0}
+                style={{
+                  flex: 1,
+                  borderColor: "#B49284",
+                  color: selectedDayId === day.id ? "#FFF" : "#B49284",
+                  backgroundColor:
+                    selectedDayId === day.id ? "#B49284" : "#FFF",
+                }}
+                sx={{
+                  color: "#B49284",
+                  width: "100%",
+                  transition: "0.3s",
+                  ":hover": {
+                    backgroundColor: "#B49284 !important",
+                    color: "#FFF !important",
+                    transition: "0.3s",
+                  },
+                }}
                 onClick={() => onDayChange(day.id)}
-                color={selectedDayId === day.id ? "indigo" : "gray"}
               >
                 {dayjs(day.day).locale("ru").format("D MMMM")}
               </Button>
@@ -57,7 +80,7 @@ export const MyDatePicker: FC<Props> = ({
           ))}
         </Carousel>
       </Box>
-      <Text align={"center"} mt={"xl"} color={"indigo"}>
+      <Text color={"#B49284"} align={"center"} mt={"xl"}>
         Выберите время
       </Text>
       <SimpleGrid p={"sm"} cols={3}>
@@ -65,12 +88,29 @@ export const MyDatePicker: FC<Props> = ({
           <Button
             key={timeObj.id}
             onClick={() => onTimeSelect(timeObj.id)}
-            color={selectedTimeId === timeObj.id ? "indigo" : "gray"}
+            radius={0}
+            style={{
+              flex: 1,
+              borderColor: "#B49284",
+              color: selectedTimeId === timeObj.id ? "#FFF" : "#B49284",
+              backgroundColor:
+                selectedTimeId === timeObj.id ? "#B49284" : "#FFF",
+            }}
+            sx={{
+              color: "#B49284",
+              width: "100%",
+              transition: "0.3s",
+              ":hover": {
+                backgroundColor: "#B49284 !important",
+                color: "#FFF !important",
+                transition: "0.3s",
+              },
+            }}
           >
             {timeObj.time}
           </Button>
         ))}
       </SimpleGrid>
-    </Alert>
+    </Box>
   );
 };
