@@ -9,7 +9,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import { ServiceApi } from "../../api/ServiceApi";
+import { CategoriesVariants, ServiceApi } from "../../api/ServiceApi";
 import { UserApi } from "../../api/UserApi";
 
 const CreateService = () => {
@@ -17,6 +17,8 @@ const CreateService = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState<undefined | number>(50);
   const [image, setImage] = useState<File | null>(null);
+
+  const [category, setCategory] = useState<string | null>(null);
 
   const [masters, setMasters] = useState<SelectItem[]>([]);
   const [selectedMaster, setSelectedMaster] = useState<string | null>(null);
@@ -42,7 +44,14 @@ const CreateService = () => {
 
   const onSubmit = async () => {
     try {
-      if (!image || !selectedMaster || !price || !name || !description) {
+      if (
+        !image ||
+        !selectedMaster ||
+        !price ||
+        !name ||
+        !description ||
+        !category
+      ) {
         showNotification({ message: "Заполните все поля" });
         return;
       }
@@ -50,6 +59,7 @@ const CreateService = () => {
       const formData = new FormData();
 
       formData.append("name", name);
+      formData.append("category", category);
       formData.append("description", description);
       formData.append("price", price ? price.toString() : "50");
       formData.append("img", image);
@@ -74,6 +84,30 @@ const CreateService = () => {
         }}
         label={"Наименование услуги"}
         placeholder={"Введите название услуги"}
+      />
+      <Select
+        value={category}
+        onChange={setCategory}
+        label={"Выберите категорию"}
+        placeholder={"Категории"}
+        data={[
+          {
+            value: CategoriesVariants.brows,
+            label: CategoriesVariants.brows,
+          },
+          {
+            value: CategoriesVariants.eyelashes,
+            label: CategoriesVariants.eyelashes,
+          },
+          {
+            value: CategoriesVariants.pedicure,
+            label: CategoriesVariants.pedicure,
+          },
+          {
+            value: CategoriesVariants.manicure,
+            label: CategoriesVariants.manicure,
+          },
+        ]}
       />
       <TextInput
         value={description}

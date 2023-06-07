@@ -51,6 +51,7 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack>
             <TextInput
+              required
               {...register("email")}
               label={"Email"}
               placeholder={"example@mail.com"}
@@ -62,10 +63,10 @@ const Login = () => {
               </p>
             )}
             <PasswordInput
+              required
               {...register("password")}
               label={"Пароль"}
               placeholder={"Введите пароль"}
-              type={"password"}
             />
             {errors.password && (
               <p>

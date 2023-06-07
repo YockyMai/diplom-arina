@@ -5,5 +5,5 @@ export interface IUser {
   username: string;
   createdAt: string;
   updatedAt: string;
-  phone: number;
+  phone: string;
 }

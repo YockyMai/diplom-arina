@@ -139,7 +139,11 @@ const EventsPageDetailing = () => {
                 setSelectedTimeId={setSelectedTimeId}
                 selectedDayId={selectedDayId}
                 setSelectedDayId={setSelectedDayId}
-                days={service.calendars[0].days}
+                days={service.calendars[0].days.sort((a, b) => {
+                  const dateA = new Date(a.day);
+                  const dateB = new Date(b.day);
+                  return dateA.getTime() - dateB.getTime();
+                })}
               />
             )}
             <Text color={"#B49385"}>

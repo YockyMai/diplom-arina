@@ -9,6 +9,7 @@ import {
   Divider,
   Group,
   Image,
+  Modal,
   rem,
   SimpleGrid,
   Stack,
@@ -23,6 +24,8 @@ import { getImageUrl } from "../libs/getImageUrl";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { useAppSelector } from "../store/hooks";
+import EditUser from "../components/EditUser";
+import { showNotification } from "@mantine/notifications";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -84,7 +87,33 @@ const useStyles = createStyles((theme) => ({
 const MasterPage = () => {
   const user = useAppSelector((state) => state.user.user);
 
-  const { classes } = useStyles();
+  const [confirmCancelModal, setConfirmCancelModal] = useState(false);
+  const [cancelAppointmentId, setCancelAppointmentId] = useState<null | number>(
+    null
+  );
+
+  const cancelAppointments = () => {
+    if (cancelAppointmentId)
+      AppointmentApi.cancel(cancelAppointmentId)
+        .then(() => {
+          showNotification({
+            message: "Услугуа отменена ",
+          });
+          setAppointments((prev) => {
+            return prev.filter((item) => item.id !== cancelAppointmentId);
+          });
+        })
+        .catch(() => {
+          showNotification({
+            title: "Ошибка",
+            message: "Не удалось отменить услугу, попробуйте позже",
+          });
+        })
+        .finally(() => {
+          setConfirmCancelModal(false);
+          setCancelAppointmentId(null);
+        });
+  };
 
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
 
@@ -97,7 +126,12 @@ const MasterPage = () => {
 
   const items = appointments.map((item) => (
     <div style={{ borderRadius: "0.3em", overflow: "hidden" }}>
-      <Image src={getImageUrl(item.service.img)} />
+      <Image
+        fit={"cover"}
+        sx={{ overflow: "hidden" }}
+        h={350}
+        src={getImageUrl(item.service.img)}
+      />
       <Box
         p={"md"}
         pt={"sm"}
@@ -123,6 +157,33 @@ const MasterPage = () => {
             <Text color={"#B49284"}>{item.user.username}</Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
+          {!item.canceled && (
+            <Stack>
+              <Button
+                p={"xl"}
+                size={"xl"}
+                style={{ flex: 1, borderColor: "#B49284" }}
+                sx={{
+                  color: "#B49284",
+                  width: "100%",
+                  transition: "0.3s",
+                  ":hover": {
+                    backgroundColor: "#B49284",
+                    color: "#FFF",
+                    transition: "0.3s",
+                  },
+                }}
+                variant={"outline"}
+                color={"indigo"}
+                onClick={() => {
+                  setConfirmCancelModal(true);
+                  setCancelAppointmentId(item.id);
+                }}
+              >
+                Отменить запись
+              </Button>
+            </Stack>
+          )}
         </div>
       </Box>
     </div>
@@ -131,7 +192,7 @@ const MasterPage = () => {
   return (
     <MainLayout>
       <Container my={150} size={"xl"}>
-        <Title mb={"md"}>Добро пожаловать {user.username}</Title>
+        <EditUser />
         <Text mb={"xl"} size={"xl"}>
           Ваши клиенты:
         </Text>
@@ -144,6 +205,51 @@ const MasterPage = () => {
           {items}
         </SimpleGrid>
       </Container>
+      <Modal
+        centered
+        opened={confirmCancelModal}
+        onClose={() => {
+          setConfirmCancelModal(false);
+        }}
+      >
+        <Stack>
+          <Text
+            sx={{ width: "100%" }}
+            size={"lg"}
+            weight={"bold"}
+            color={"#B49284"}
+            align={"center"}
+          >
+            Вы уверены что хотите отменить запись?
+          </Text>
+          <Text align={"center"}>
+            Отменить данное действие будет невозможно
+          </Text>
+          <Button
+            radius={0}
+            p={"xl"}
+            size={"xl"}
+            style={{ flex: 1, borderColor: "#B49284" }}
+            sx={{
+              color: "#B49284",
+              width: "100%",
+              transition: "0.3s",
+              ":hover": {
+                backgroundColor: "#B49284",
+                color: "#FFF",
+                transition: "0.3s",
+              },
+            }}
+            variant={"outline"}
+            color={"indigo"}
+            onClick={() => {
+              cancelAppointments();
+            }}
+          >
+            Отменить запись
+          </Button>
+        </Stack>
+      </Modal>
     </MainLayout>
   );
 };

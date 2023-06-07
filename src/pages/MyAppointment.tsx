@@ -24,8 +24,8 @@ import { IAppointment } from "../types/objects/appointment";
 import { getImageUrl } from "../libs/getImageUrl";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
-import { useAppSelector } from "../store/hooks";
 import { showNotification } from "@mantine/notifications";
+import EditUser from "../components/EditUser";
 
 const MyAppointment = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
@@ -33,6 +33,7 @@ const MyAppointment = () => {
   useEffect(() => {
     AppointmentApi.getAllForUser().then(({ data }) => {
       setAppointments(data);
+      console.log(data);
     });
   }, []);
   const [confirmCancelModal, setConfirmCancelModal] = useState(false);
@@ -65,7 +66,12 @@ const MyAppointment = () => {
 
   const items = appointments.map((item) => (
     <div style={{ borderRadius: "0.3em", overflow: "hidden" }}>
-      <Image src={getImageUrl(item.service.img)} />
+      <Image
+        fit={"cover"}
+        sx={{ overflow: "hidden" }}
+        h={350}
+        src={getImageUrl(item.service.img)}
+      />
       <Box
         p={"md"}
         pt={"sm"}
@@ -77,30 +83,31 @@ const MyAppointment = () => {
             {item.service.name}
           </Text>
           <Group mt={"sm"} position={"apart"}>
-            <Text>Стоимость:</Text>
-            <Text color={"#B49284"} weight={"bold"} size={"lg"}>
+            <Text size={"lg"}>Стоимость:</Text>
+            <Text size={"lg"} color={"#B49284"} weight={"bold"}>
               {item.service.price}₽
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
 
           <Group position={"apart"}>
-            <Text>Дата записи:</Text>
-            <Text color={"#B49284"}>
+            <Text size={"lg"}>Дата записи:</Text>
+            <Text size={"lg"} color={"#B49284"}>
               {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           <Group position={"apart"}>
-            <Text>Ваш мастер:</Text>
+            <Text size={"lg"}>Ваш мастер:</Text>
 
-            <Text color={"#B49284"}>{item.service.user.username}</Text>
+            <Text size={"lg"} color={"#B49284"}>
+              {item.service.user.username}
+            </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           {!item.canceled && (
             <Stack>
               <Button
-                radius={0}
                 p={"xl"}
                 size={"xl"}
                 style={{ flex: 1, borderColor: "#B49284" }}
@@ -133,6 +140,7 @@ const MyAppointment = () => {
   return (
     <MainLayout>
       <Container py={150} size={"xl"}>
+        <EditUser />
         <Group position={"apart"}>
           <Title>Ваши записи</Title>
         </Group>

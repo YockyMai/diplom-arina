@@ -89,9 +89,11 @@ const Registration = () => {
               label={"Email"}
               placeholder={"example@mail.com"}
               type={"email"}
+              required
             />
             <Text color={"red"}>{errors.email?.message}</Text>
             <TextInput
+              required
               label={"Имя"}
               placeholder={"Иван"}
               {...register("username")}
@@ -109,6 +111,7 @@ const Registration = () => {
             <Text color={"red"}>{errors.phone?.message}</Text>
 
             <PasswordInput
+              required
               {...register("password")}
               label={"Пароль"}
               placeholder={"Введите пароль"}
@@ -116,6 +119,7 @@ const Registration = () => {
             <Text color={"red"}>{errors.password?.message}</Text>
 
             <PasswordInput
+              required
               label={"Повторите пароль"}
               placeholder={"Введите пароль"}
               {...register("repeatPassword")}

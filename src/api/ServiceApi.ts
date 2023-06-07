@@ -1,9 +1,16 @@
 import axios from "../core/axios";
 import { IService } from "../types/objects/service";
 
+export enum CategoriesVariants {
+  eyelashes = "Ресницы",
+  pedicure = "Педикюр",
+  brows = "Брови",
+  manicure = "Маникюр",
+}
+
 export const ServiceApi = {
-  getAll() {
-    return axios.get<IService[]>("/service/getAll");
+  getAll(category?: string) {
+    return axios.get<IService[]>("/service/getAll", { params: category });
   },
   getOne(id: number) {
     return axios.get<IService>(`/service/${id}`);

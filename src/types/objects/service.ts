@@ -11,6 +11,7 @@ export interface IService {
   userId: 3;
   user: IUser;
   calendars: Calendar[];
+  category: string;
 }
 
 export type Calendar = {

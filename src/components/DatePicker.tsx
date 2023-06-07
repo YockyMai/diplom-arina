@@ -20,7 +20,12 @@ export const MyDatePicker: FC<Props> = ({
   setSelectedTimeId,
   selectedTimeId,
 }) => {
-  const [times, setTimes] = useState<Time[]>(days[0].times);
+  const sortedTime = days[0].times.sort((curr, prev) =>
+    Number(curr.time.replace(":", "")) > Number(prev.time.replace(":", ""))
+      ? 1
+      : -1
+  );
+  const [times, setTimes] = useState<Time[]>(sortedTime);
 
   const onDayChange = (dayId: number) => {
     setSelectedTimeId(null);
