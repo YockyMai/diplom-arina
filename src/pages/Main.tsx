@@ -43,21 +43,22 @@ const MainPage = () => {
           justifyContent: "center",
         }}
       >
-        <Image
+        <img
           src={backgroundMenu}
-          sx={{
+          style={{
             position: "absolute",
             left: 0,
             top: 0,
             width: "100%",
             height: "100vh",
             zIndex: -1,
+            objectFit: "cover",
           }}
-          alt=""
         />
         <Title
           color={"#FFF"}
           p={"xl"}
+          align={"center"}
           sx={{ backgroundColor: "rgba(0,0,0,0.46)", width: "fit-content" }}
         >
           Мы позаботимся о вашей красоте!
@@ -94,10 +95,10 @@ const MainPage = () => {
         </Stack>
       </Box>
       <Container my={100} size={"xl"}>
-        <SimpleGrid cols={2}>
+        <SimpleGrid breakpoints={[{ maxWidth: "lg", cols: 1 }]} cols={2}>
           <Center>
             <Stack align={"center"}>
-              <Title>Приглашаем в наш салон красоты</Title>
+              <Title align={"center"}>Приглашаем в наш салон красоты</Title>
               <Text align={"center"}>
                 Мы создаем красоту, предоставляя качественные услуги в
                 дружелюбной обстановке по доступным ценам. Мы строим одну из
@@ -126,7 +127,7 @@ const MainPage = () => {
                     Записаться
                   </Button>
                 ) : (
-                  <Text>
+                  <Text align={"center"}>
                     Чтобы записаться на услугу необходимо зарегистрироваться.
                   </Text>
                 )}

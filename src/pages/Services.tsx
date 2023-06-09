@@ -13,6 +13,7 @@ import {
   Box,
   Button,
   Center,
+  Group,
   SimpleGrid,
   Stack,
   Text,
@@ -21,6 +22,7 @@ import {
 import { IService } from "../types/objects/service";
 import { CategoriesVariants, ServiceApi } from "../api/ServiceApi";
 import { showNotification } from "@mantine/notifications";
+import { IconAlarmFilled, IconCoins } from "@tabler/icons-react";
 
 const ServiceItem = ({ service }: { service: IService }) => {
   return (
@@ -38,11 +40,18 @@ const ServiceItem = ({ service }: { service: IService }) => {
     >
       <div>
         <Title order={3}>{service.name}</Title>
-        <Text align={"left"} lineClamp={7}>
-          {service.description}
-        </Text>
       </div>
       <div>
+        <Stack mb={"md"} justify={"center"}>
+          <Group align={"center"} spacing={"xl"}>
+            <IconAlarmFilled />
+            <Text>Длительность - 2ч.</Text>
+          </Group>
+          <Group align={"center"} spacing={"xl"}>
+            <IconCoins />
+            <Text>Стоимость - {service.price} руб.</Text>
+          </Group>
+        </Stack>
         <Button
           component={Link}
           to={`/events/${service.id}`}
@@ -61,7 +70,7 @@ const ServiceItem = ({ service }: { service: IService }) => {
           }}
           variant={"outline"}
         >
-          Подробнее
+          Записаться
         </Button>
       </div>
     </Box>
@@ -155,7 +164,15 @@ const Services = () => {
               Ресницы
             </Title>
           </Center>
-          <SimpleGrid p={"md"} cols={5}>
+          <SimpleGrid
+            breakpoints={[
+              { cols: 3, maxWidth: "xl" },
+              { cols: 2, maxWidth: "md" },
+              { cols: 1, maxWidth: "sm" },
+            ]}
+            p={"md"}
+            cols={5}
+          >
             {eyelashes.map((service) => (
               <ServiceItem service={service} />
             ))}
@@ -174,7 +191,15 @@ const Services = () => {
               Педикюр
             </Title>
           </Center>
-          <SimpleGrid p={"md"} cols={5}>
+          <SimpleGrid
+            breakpoints={[
+              { cols: 3, maxWidth: "xl" },
+              { cols: 2, maxWidth: "md" },
+              { cols: 1, maxWidth: "sm" },
+            ]}
+            p={"md"}
+            cols={5}
+          >
             {pedicure.map((service) => (
               <ServiceItem service={service} />
             ))}
@@ -193,7 +218,15 @@ const Services = () => {
               Брови
             </Title>
           </Center>
-          <SimpleGrid p={"md"} cols={5}>
+          <SimpleGrid
+            breakpoints={[
+              { cols: 3, maxWidth: "xl" },
+              { cols: 2, maxWidth: "md" },
+              { cols: 1, maxWidth: "sm" },
+            ]}
+            p={"md"}
+            cols={5}
+          >
             {brows.map((service) => (
               <ServiceItem service={service} />
             ))}
@@ -212,7 +245,15 @@ const Services = () => {
               Маникюр
             </Title>
           </Center>
-          <SimpleGrid p={"md"} cols={5}>
+          <SimpleGrid
+            breakpoints={[
+              { cols: 3, maxWidth: "xl" },
+              { cols: 2, maxWidth: "md" },
+              { cols: 1, maxWidth: "sm" },
+            ]}
+            p={"md"}
+            cols={5}
+          >
             {manicure.map((service) => (
               <ServiceItem service={service} />
             ))}

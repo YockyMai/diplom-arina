@@ -94,17 +94,6 @@ const EventsPageDetailing = () => {
           my={"xl"}
           pt={"xl"}
         >
-          <Image
-            src={getImageUrl(service.img)}
-            width={"100%"}
-            height={"auto"}
-            fit={"contain"}
-            sx={(theme) => ({
-              borderRadius: theme.radius.sm,
-              overflow: "hidden",
-            })}
-          />
-
           <Stack>
             <Group position={"apart"}>
               <Title order={1}>{service.name}</Title>
@@ -112,26 +101,21 @@ const EventsPageDetailing = () => {
             <Box
               sx={(theme) => ({
                 borderRadius: theme.radius.sm,
-                backgroundColor: "#B49385",
+                backgroundColor: "rgba(180,147,133,0.3)",
                 overflow: "hidden",
               })}
             >
-              <Text
-                size={"lg"}
-                sx={{ backgroundColor: "#856d62" }}
-                py={"lg"}
-                color={"#FFF"}
-                align={"center"}
-              >
+              <Text size={"xl"} py={"lg"} color={"#B49284"} align={"center"}>
                 Описание
               </Text>
-              <Text p={"xl"} color={"#FFF"}>
+              <Text px={"xl"} pb={"xl"} size={"xl"} color={"#B49284"}>
                 {service.description}
               </Text>
             </Box>
+            <Text size={"xl"} color={"#B49385"}>
+              Стоимость услуги составит : {service.price} рублей.
+            </Text>
           </Stack>
-        </SimpleGrid>
-        <Center>
           <Stack>
             {selectedDayId && (
               <MyDatePicker
@@ -146,9 +130,6 @@ const EventsPageDetailing = () => {
                 })}
               />
             )}
-            <Text color={"#B49385"}>
-              Стоимость услуги составит : {service.price} рублей.
-            </Text>
 
             <Button
               radius={0}
@@ -172,7 +153,7 @@ const EventsPageDetailing = () => {
               Записаться
             </Button>
           </Stack>
-        </Center>
+        </SimpleGrid>
       </Container>
     </MainLayout>
   );

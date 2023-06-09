@@ -48,7 +48,7 @@ export const MyDatePicker: FC<Props> = ({
       <Title py={"sm"} order={5} color={"#B49284"}>
         Выберите дату для записи
       </Title>
-      <Box sx={{ maxWidth: 400 }}>
+      <Box sx={{ maxWidth: 400, margin: "0 auto" }}>
         <Carousel
           height={40}
           initialSlide={2}

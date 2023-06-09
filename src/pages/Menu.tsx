@@ -29,7 +29,7 @@ const MenuPage = () => {
       <Header />
       <Box
         sx={{
-          height: "100vh",
+          minHeight: "100vh",
           width: "100%",
           position: "relative",
           overflow: "hidden",
@@ -38,16 +38,17 @@ const MenuPage = () => {
           alignItems: "center",
         }}
       >
-        <Image
+        <img
           src={Studio63}
           alt=""
-          sx={{
+          style={{
             position: "absolute",
             zIndex: -1,
             top: 0,
             left: 0,
             width: "100%",
             height: "100%",
+            objectFit: "cover",
           }}
         />
         <Container>
@@ -68,6 +69,7 @@ const MenuPage = () => {
               p={30}
               sx={{ backgroundColor: "rgba(0,0,0,0.56)" }}
               spacing={"lg"}
+              mb={30}
             >
               <List.Item>
                 <Text color={"#FFF"}>

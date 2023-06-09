@@ -66,10 +66,13 @@ const MyAppointment = () => {
 
   const items = appointments.map((item) => (
     <div style={{ borderRadius: "0.3em", overflow: "hidden" }}>
-      <Image
-        fit={"cover"}
-        sx={{ overflow: "hidden" }}
-        h={350}
+      <img
+        style={{
+          overflow: "hidden",
+          height: 350,
+          width: "100%",
+          objectFit: "cover",
+        }}
         src={getImageUrl(item.service.img)}
       />
       <Box
@@ -149,7 +152,10 @@ const MyAppointment = () => {
           <SimpleGrid
             cols={3}
             spacing={50}
-            breakpoints={[{ maxWidth: 550, cols: 1, spacing: 40 }]}
+            breakpoints={[
+              { maxWidth: 730, cols: 1, spacing: 40 },
+              { maxWidth: 1300, cols: 2, spacing: 20 },
+            ]}
             style={{ marginTop: 30 }}
           >
             {items}
