@@ -45,7 +45,7 @@ const ServiceItem = ({ service }: { service: IService }) => {
         <Stack mb={"md"} justify={"center"}>
           <Group align={"center"} spacing={"xl"}>
             <IconAlarmFilled />
-            <Text>Длительность - 2ч.</Text>
+            <Text>Длительность - 1ч.</Text>
           </Group>
           <Group align={"center"} spacing={"xl"}>
             <IconCoins />
