@@ -30,7 +30,7 @@ function App() {
           <Route path={"/menu"} element={<Menu />} />
           <Route path={"/Services"} element={<Services />} />
           <Route path={"/masters"} element={<MastersPage />} />
-
+          <Route path={"/events/:eventId"} element={<EventsPageDetailing />} />
           {isAuth ? (
             <>
               {role === "MASTER" && (
@@ -40,10 +40,6 @@ function App() {
                 <Route path={"/admin"} element={<AdminPage />} />
               )}
               <Route path={"/events"} element={<EventsPage />} />
-              <Route
-                path={"/events/:eventId"}
-                element={<EventsPageDetailing />}
-              />
               <Route path={"/appointment"} element={<MyAppointment />} />
             </>
           ) : (

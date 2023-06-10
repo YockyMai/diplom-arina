@@ -75,7 +75,7 @@ const Header = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "rgba(0,0,0,0.7)",
+        backgroundColor: "rgba(0,0,0,0.8)",
         position: "fixed",
         width: "100%",
         zIndex: 100,
@@ -83,7 +83,7 @@ const Header = () => {
         top: 0,
       }}
     >
-      <Container size={"xl"} sx={{ width: "100%" }}>
+      <Container size={"lg"} sx={{ width: "100%" }}>
         <Group spacing={"xl"} position={"apart"}>
           <Link to={"/"}>
             <Group noWrap>
@@ -92,7 +92,7 @@ const Header = () => {
                 src={logoSrc as any}
                 alt="Beauty Saloon"
               />
-              <h1 style={{ color: "#FFF" }}>Студия63</h1>
+              <h1 style={{ color: "#FFF" }}>СТУДИЯ63</h1>
             </Group>
           </Link>
           <Group>
@@ -103,94 +103,156 @@ const Header = () => {
                   className={"header__links"}
                   to="/Menu#about"
                 >
-                  <Text size={"lg"}>О нас</Text>
+                  <Text size={"lg"}>О НАС</Text>
                 </Link>
                 <Link
                   style={{ color: "#FFF" }}
                   className={"header__links"}
                   to={"/Menu#services"}
                 >
-                  <Text size={"lg"}> Услуги и цены</Text>
+                  <Text size={"lg"}>УСЛУГИ И ЦЕНЫ</Text>
                 </Link>
                 <Link
                   style={{ color: "#FFF" }}
                   className={"header__links"}
                   to={"/Menu#footer"}
                 >
-                  <Text size={"lg"}>Контакты</Text>
+                  <Text size={"lg"}>КОНТАКТЫ</Text>
                 </Link>
                 <Link
                   style={{ color: "#FFF" }}
                   className={"header__links"}
                   to={"/masters"}
                 >
-                  <Text size={"lg"}>Мастера</Text>
+                  <Text size={"lg"}>МАСТЕРА</Text>
                 </Link>
+                {isAuth ? (
+                  <Menu shadow="md" width={200}>
+                    <Menu.Target>
+                      <UnstyledButton>
+                        <Text
+                          size={"lg"}
+                          sx={{ whiteSpace: "nowrap" }}
+                          color={"#FFFFFF"}
+                        >
+                          {user.username}
+                        </Text>
+                      </UnstyledButton>
+                    </Menu.Target>
+
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        style={{ color: "#000000" }}
+                        onClick={signOutFunc}
+                      >
+                        <Text size={"lg"}>Выйти</Text>
+                      </Menu.Item>
+                      {isAuth && (
+                        <>
+                          {role === "USER" && (
+                            <Menu.Item
+                              style={{ color: "#000000" }}
+                              component={Link}
+                              to={"/appointment"}
+                            >
+                              <Text size={"lg"}>Мои записи</Text>
+                            </Menu.Item>
+                          )}
+                          {role === "MASTER" && (
+                            <Menu.Item
+                              style={{ color: "#000000" }}
+                              component={Link}
+                              to={"/master"}
+                            >
+                              <Text size={"lg"}>Записи</Text>
+                            </Menu.Item>
+                          )}
+                          {role === "ADMIN" && (
+                            <Menu.Item
+                              style={{ color: "#000000" }}
+                              component={Link}
+                              to={"/admin"}
+                            >
+                              <Text size={"lg"}>Админ панель</Text>
+                            </Menu.Item>
+                          )}
+                        </>
+                      )}
+                    </Menu.Dropdown>
+                  </Menu>
+                ) : (
+                  <Link to="/registration" style={{ color: "#FFF" }}>
+                    <Text size={"lg"}>РЕГИСТРАЦИЯ</Text>
+                  </Link>
+                )}
               </>
             ) : (
               <IconMenu2 color={"#FFF"} onClick={open} />
-            )}
-            {isAuth ? (
-              <Menu shadow="md" width={200}>
-                <Menu.Target>
-                  <UnstyledButton>
-                    <Text
-                      size={"lg"}
-                      sx={{ whiteSpace: "nowrap" }}
-                      color={"#FFFFFF"}
-                    >
-                      {user.username}
-                    </Text>
-                  </UnstyledButton>
-                </Menu.Target>
-
-                <Menu.Dropdown>
-                  <Menu.Item style={{ color: "#000000" }} onClick={signOutFunc}>
-                    <Text size={"lg"}>Выйти</Text>
-                  </Menu.Item>
-                  {isAuth && (
-                    <>
-                      {role === "USER" && (
-                        <Menu.Item
-                          style={{ color: "#000000" }}
-                          component={Link}
-                          to={"/appointment"}
-                        >
-                          <Text size={"lg"}>Мои записи</Text>
-                        </Menu.Item>
-                      )}
-                      {role === "MASTER" && (
-                        <Menu.Item
-                          style={{ color: "#000000" }}
-                          component={Link}
-                          to={"/master"}
-                        >
-                          <Text size={"lg"}>Записи</Text>
-                        </Menu.Item>
-                      )}
-                      {role === "ADMIN" && (
-                        <Menu.Item
-                          style={{ color: "#000000" }}
-                          component={Link}
-                          to={"/admin"}
-                        >
-                          <Text size={"lg"}>Админ панель</Text>
-                        </Menu.Item>
-                      )}
-                    </>
-                  )}
-                </Menu.Dropdown>
-              </Menu>
-            ) : (
-              <Link to="/registration" style={{ color: "#FFF" }}>
-                <Text size={"lg"}>Регистрация</Text>
-              </Link>
             )}
           </Group>
         </Group>
         {screenWidth <= 905 && (
           <Drawer opened={opened} onClose={close}>
             <Stack>
+              {isAuth ? (
+                <Menu shadow="md" width={200}>
+                  <Menu.Target>
+                    <UnstyledButton>
+                      <Text
+                        size={"lg"}
+                        sx={{ whiteSpace: "nowrap" }}
+                        color={"#000"}
+                      >
+                        {user.username}
+                      </Text>
+                    </UnstyledButton>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Item
+                      style={{ color: "#000000" }}
+                      onClick={signOutFunc}
+                    >
+                      <Text size={"lg"}>Выйти</Text>
+                    </Menu.Item>
+                    {isAuth && (
+                      <>
+                        {role === "USER" && (
+                          <Menu.Item
+                            style={{ color: "#000000" }}
+                            component={Link}
+                            to={"/appointment"}
+                          >
+                            <Text size={"lg"}>Мои записи</Text>
+                          </Menu.Item>
+                        )}
+                        {role === "MASTER" && (
+                          <Menu.Item
+                            style={{ color: "#000000" }}
+                            component={Link}
+                            to={"/master"}
+                          >
+                            <Text size={"lg"}>Записи</Text>
+                          </Menu.Item>
+                        )}
+                        {role === "ADMIN" && (
+                          <Menu.Item
+                            style={{ color: "#000000" }}
+                            component={Link}
+                            to={"/admin"}
+                          >
+                            <Text size={"lg"}>Админ панель</Text>
+                          </Menu.Item>
+                        )}
+                      </>
+                    )}
+                  </Menu.Dropdown>
+                </Menu>
+              ) : (
+                <Link to="/registration" style={{ color: "#000" }}>
+                  <Text size={"lg"}>РЕГИСТРАЦИЯ</Text>
+                </Link>
+              )}
               <Link
                 style={{ color: "#FFF" }}
                 className={"header__links"}
@@ -206,7 +268,6 @@ const Header = () => {
                 to={"/Menu#services"}
               >
                 <Text color={"#000"} size={"lg"}>
-                  {" "}
                   Услуги и цены
                 </Text>
               </Link>

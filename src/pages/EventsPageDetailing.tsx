@@ -27,6 +27,7 @@ import { MyDatePicker } from "../components/DatePicker";
 
 const EventsPageDetailing = () => {
   const userId = useAppSelector((state) => state.user.user.id);
+  const isAuth = useAppSelector((state) => state.user.isAuth);
   const { eventId } = useParams();
 
   const [service, setService] = useState<IService | null>(null);
@@ -57,6 +58,13 @@ const EventsPageDetailing = () => {
 
   const onSubmit = async () => {
     try {
+      if (!isAuth) {
+        showNotification({
+          color: "red",
+          message: "Авторизуйтесь чтобы записаться на услугу",
+        });
+        return;
+      }
       if (!selectedDayId) {
         showNotification({ color: "red", message: "Выберите день записи" });
         return;
@@ -94,9 +102,17 @@ const EventsPageDetailing = () => {
           my={"xl"}
           pt={"xl"}
         >
-          <Stack>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <Group position={"apart"}>
-              <Title order={1}>{service.name}</Title>
+              <Title color={"#B49284"} order={1}>
+                {service.name}
+              </Title>
             </Group>
             <Box
               sx={(theme) => ({
@@ -112,10 +128,11 @@ const EventsPageDetailing = () => {
                 {service.description}
               </Text>
             </Box>
+
             <Text size={"xl"} color={"#B49385"}>
               Стоимость услуги составит : {service.price} рублей.
             </Text>
-          </Stack>
+          </Box>
           <Stack>
             {selectedDayId && (
               <MyDatePicker
@@ -130,30 +147,31 @@ const EventsPageDetailing = () => {
                 })}
               />
             )}
-
-            <Button
-              radius={0}
-              p={"xl"}
-              size={"xl"}
-              style={{ flex: 1, borderColor: "#B49284" }}
-              sx={{
-                color: "#B49284",
-                width: "100%",
-                transition: "0.3s",
-                ":hover": {
-                  backgroundColor: "#B49284",
-                  color: "#FFF",
-                  transition: "0.3s",
-                },
-              }}
-              variant={"outline"}
-              color={"indigo"}
-              onClick={onSubmit}
-            >
-              Записаться
-            </Button>
           </Stack>
         </SimpleGrid>
+        <Stack mx={"auto"} sx={{ maxWidth: 400 }}>
+          <Button
+            radius={0}
+            p={"xl"}
+            size={"xl"}
+            style={{ flex: 1, borderColor: "#B49284" }}
+            sx={{
+              color: "#B49284",
+              width: "100%",
+              transition: "0.3s",
+              ":hover": {
+                backgroundColor: "#B49284",
+                color: "#FFF",
+                transition: "0.3s",
+              },
+            }}
+            variant={"outline"}
+            color={"indigo"}
+            onClick={onSubmit}
+          >
+            Записаться
+          </Button>
+        </Stack>
       </Container>
     </MainLayout>
   );
