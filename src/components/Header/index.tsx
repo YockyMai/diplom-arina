@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./styles.css";
 import logoSrc from "../../assets/logo.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -80,6 +79,8 @@ const Header = () => {
         position: "fixed",
         width: "100%",
         zIndex: 100,
+        left: 0,
+        top: 0,
       }}
     >
       <Container size={"xl"} sx={{ width: "100%" }}>
