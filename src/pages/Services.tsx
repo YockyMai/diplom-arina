@@ -39,17 +39,17 @@ const ServiceItem = ({ service }: { service: IService }) => {
       }}
     >
       <div>
-        <Title order={3}>{service.name}</Title>
+        <Title order={2}>{service.name}</Title>
       </div>
       <div>
-        <Stack mb={"md"} justify={"center"}>
+        <Stack mb={"md"} align={"center"} justify={"center"}>
           <Group align={"center"} spacing={"xl"}>
             <IconAlarmFilled />
-            <Text>Длительность - 1ч.</Text>
+            <Text size={"xl"}>Длительность - 1ч.</Text>
           </Group>
           <Group align={"center"} spacing={"xl"}>
             <IconCoins />
-            <Text>Стоимость - {service.price} руб.</Text>
+            <Text size={"xl"}>Стоимость - {service.price} руб.</Text>
           </Group>
         </Stack>
         <Button
@@ -171,7 +171,7 @@ const Services = () => {
               { cols: 1, maxWidth: "sm" },
             ]}
             p={"md"}
-            cols={5}
+            cols={3}
           >
             {eyelashes.map((service) => (
               <ServiceItem service={service} />
@@ -198,7 +198,7 @@ const Services = () => {
               { cols: 1, maxWidth: "sm" },
             ]}
             p={"md"}
-            cols={5}
+            cols={3}
           >
             {pedicure.map((service) => (
               <ServiceItem service={service} />
@@ -225,7 +225,7 @@ const Services = () => {
               { cols: 1, maxWidth: "sm" },
             ]}
             p={"md"}
-            cols={5}
+            cols={3}
           >
             {brows.map((service) => (
               <ServiceItem service={service} />
@@ -252,7 +252,7 @@ const Services = () => {
               { cols: 1, maxWidth: "sm" },
             ]}
             p={"md"}
-            cols={5}
+            cols={3}
           >
             {manicure.map((service) => (
               <ServiceItem service={service} />

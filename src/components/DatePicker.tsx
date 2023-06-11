@@ -1,7 +1,13 @@
 import { Alert, Box, Button, SimpleGrid, Text, Title } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { Day, Time } from "../types/objects/service";
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 
@@ -20,12 +26,48 @@ export const MyDatePicker: FC<Props> = ({
   setSelectedTimeId,
   selectedTimeId,
 }) => {
-  const sortedTime = days[0].times.sort((curr, prev) =>
-    Number(curr.time.replace(":", "")) > Number(prev.time.replace(":", ""))
-      ? 1
-      : -1
-  );
+  const sortedTime = days[0].times.sort((a, b) => {
+    const timeA = a.time.split(":"); // Разделяем строку по двоеточию
+    const timeB = b.time.split(":");
+
+    const hourA = parseInt(timeA[0]); // Преобразуем часы в число
+    const hourB = parseInt(timeB[0]);
+
+    const minuteA = parseInt(timeA[1]); // Преобразуем минуты в число
+    const minuteB = parseInt(timeB[1]);
+
+    // Сравниваем часы
+    if (hourA !== hourB) {
+      return hourA - hourB;
+    }
+
+    // Если часы равны, сравниваем минуты
+    return minuteA - minuteB;
+  });
   const [times, setTimes] = useState<Time[]>(sortedTime);
+
+  useEffect(() => {
+    const selectedDay = days.find((day) => day.id === selectedDayId) || days[0];
+    const sortedTime = selectedDay.times.sort((a, b) => {
+      const timeA = a.time.split(":"); // Разделяем строку по двоеточию
+      const timeB = b.time.split(":");
+
+      const hourA = parseInt(timeA[0]); // Преобразуем часы в число
+      const hourB = parseInt(timeB[0]);
+
+      const minuteA = parseInt(timeA[1]); // Преобразуем минуты в число
+      const minuteB = parseInt(timeB[1]);
+
+      // Сравниваем часы
+      if (hourA !== hourB) {
+        return hourA - hourB;
+      }
+
+      // Если часы равны, сравниваем минуты
+      return minuteA - minuteB;
+    });
+    setTimes(sortedTime);
+  }, [selectedDayId]);
 
   const onDayChange = (dayId: number) => {
     setSelectedTimeId(null);
