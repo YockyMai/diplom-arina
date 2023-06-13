@@ -92,15 +92,16 @@ export const MyDatePicker: FC<Props> = ({
       </Title>
       <Box sx={{ maxWidth: 400, margin: "0 auto" }}>
         <Carousel
-          height={40}
-          initialSlide={2}
+          height={50}
+          initialSlide={1}
           slideSize="33.333333%"
           mx="auto"
-          px={50}
+          px={30}
         >
           {days.map((day) => (
             <Carousel.Slide key={day.id}>
               <Button
+                size={"md"}
                 radius={0}
                 style={{
                   flex: 1,
@@ -136,6 +137,7 @@ export const MyDatePicker: FC<Props> = ({
             key={timeObj.id}
             onClick={() => onTimeSelect(timeObj.id)}
             radius={0}
+            size={"md"}
             style={{
               flex: 1,
               borderColor: "#B49284",
