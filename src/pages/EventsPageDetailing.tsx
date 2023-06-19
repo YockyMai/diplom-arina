@@ -9,6 +9,7 @@ import {
   Divider,
   Group,
   Image,
+  Loader,
   Mark,
   SimpleGrid,
   Stack,
@@ -28,6 +29,7 @@ import { MyDatePicker } from "../components/DatePicker";
 const EventsPageDetailing = () => {
   const userId = useAppSelector((state) => state.user.user.id);
   const isAuth = useAppSelector((state) => state.user.isAuth);
+  const [isLoading, setIsLoading] = useState(true);
   const { eventId } = useParams();
 
   const [service, setService] = useState<IService | null>(null);
@@ -43,17 +45,20 @@ const EventsPageDetailing = () => {
         })
         .catch(() => {
           setService(null);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } else {
       setService(null);
     }
   }, []);
 
-  if (service === null)
+  if (isLoading || !service)
     return (
-      <MainLayout>
-        <Title>Этой услуги уже не существует</Title>
-      </MainLayout>
+      <Center sx={{ minHeight: "80vh" }}>
+        <Loader mt={100} size={"xl"} />
+      </Center>
     );
 
   const onSubmit = async () => {

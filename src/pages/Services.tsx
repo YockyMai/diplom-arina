@@ -14,6 +14,7 @@ import {
   Button,
   Center,
   Group,
+  Loader,
   SimpleGrid,
   Stack,
   Text,
@@ -78,6 +79,7 @@ const ServiceItem = ({ service }: { service: IService }) => {
 };
 
 const Services = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { hash } = useLocation();
 
   function smoothScrollTo(targetY: number, duration: number) {
@@ -144,8 +146,18 @@ const Services = () => {
       })
       .catch(() => {
         showNotification({ color: "red", message: "Ошибка при получении" });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
+
+  if (isLoading)
+    return (
+      <Center>
+        <Loader mt={100} size={"xl"} />
+      </Center>
+    );
 
   return (
     <div>

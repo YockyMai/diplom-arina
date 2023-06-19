@@ -18,6 +18,8 @@ import {
   Modal,
   Stack,
   Box,
+  Center,
+  Loader,
 } from "@mantine/core";
 import { AppointmentApi } from "../api/AppointmentApi";
 import { IAppointment } from "../types/objects/appointment";
