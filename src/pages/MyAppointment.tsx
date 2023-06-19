@@ -84,28 +84,28 @@ const MyAppointment = () => {
         key={item.id}
       >
         <div>
-          <Text align={"center"} fw={700} fz="lg">
+          <Title order={2} align={"center"}>
             {item.service.name}
-          </Text>
+          </Title>
           <Group mt={"sm"} position={"apart"}>
-            <Text size={"lg"}>Стоимость:</Text>
-            <Text size={"lg"} color={"#B49284"} weight={"bold"}>
+            <Text size={"xl"}>Стоимость:</Text>
+            <Text size={"xl"} color={"#B49284"} weight={"bold"}>
               {item.service.price}₽
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
 
           <Group position={"apart"}>
-            <Text size={"lg"}>Дата записи:</Text>
-            <Text size={"lg"} color={"#B49284"}>
+            <Text size={"xl"}>Дата записи:</Text>
+            <Text size={"xl"} color={"#B49284"}>
               {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           <Group position={"apart"}>
-            <Text size={"lg"}>Ваш мастер:</Text>
+            <Text size={"xl"}>Ваш мастер:</Text>
 
-            <Text size={"lg"} color={"#B49284"}>
+            <Text size={"xl"} color={"#B49284"}>
               {item.service.user.username}
             </Text>
           </Group>

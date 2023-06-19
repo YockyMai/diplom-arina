@@ -37,6 +37,7 @@ const AdminPage = () => {
         <Container mt={"xl"} size={"xs"}>
           <Stack>
             <Button
+              size={"lg"}
               onClick={() => {
                 setCreateServiceModal(true);
               }}
@@ -45,6 +46,7 @@ const AdminPage = () => {
               Добавить услугу
             </Button>
             <Button
+              size={"lg"}
               onClick={() => {
                 setEditServiceModal(true);
               }}
@@ -53,6 +55,7 @@ const AdminPage = () => {
               Редактировать услугу
             </Button>
             <Button
+              size={"lg"}
               onClick={() => {
                 setDeleteServiceModal(true);
               }}
@@ -61,6 +64,7 @@ const AdminPage = () => {
               Удалить услугу
             </Button>
             <Button
+              size={"lg"}
               onClick={() => {
                 setUserRoleModal(true);
               }}

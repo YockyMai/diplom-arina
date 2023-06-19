@@ -27,63 +27,6 @@ import { useAppSelector } from "../store/hooks";
 import EditUser from "../components/EditUser";
 import { showNotification } from "@mantine/notifications";
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    paddingTop: rem(80),
-    paddingBottom: rem(50),
-  },
-
-  item: {
-    display: "flex",
-    boxShadow: theme.shadows.xl,
-    padding: theme.spacing.xl,
-    border: `2px solid ${theme.colors.dark[9]}`,
-    borderRadius: theme.radius.md,
-  },
-
-  itemIcon: {
-    padding: theme.spacing.xs,
-    marginRight: theme.spacing.md,
-  },
-
-  itemTitle: {
-    marginBottom: `calc(${theme.spacing.xs} / 2)`,
-  },
-
-  supTitle: {
-    textAlign: "center",
-    textTransform: "uppercase",
-    fontWeight: 800,
-    fontSize: theme.fontSizes.sm,
-    color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
-      .color,
-    letterSpacing: rem(0.5),
-  },
-
-  title: {
-    lineHeight: 1,
-    textAlign: "center",
-    marginTop: theme.spacing.xl,
-  },
-
-  description: {
-    textAlign: "center",
-    marginTop: theme.spacing.xs,
-  },
-
-  highlight: {
-    backgroundColor: theme.fn.variant({
-      variant: "light",
-      color: theme.primaryColor,
-    }).background,
-    padding: rem(5),
-    paddingTop: 0,
-    borderRadius: theme.radius.sm,
-    display: "inline-block",
-    color: theme.colorScheme === "dark" ? theme.white : "inherit",
-  },
-}));
-
 const MasterPage = () => {
   const user = useAppSelector((state) => state.user.user);
 
@@ -143,21 +86,25 @@ const MasterPage = () => {
       >
         <div>
           <Group position={"apart"}>
-            <Text>Услуга:</Text>
-            <Text color={"#B49284"}>{item.service.name}</Text>
+            <Text size={"xl"}>Услуга:</Text>
+            <Text size={"xl"} color={"#B49284"}>
+              {item.service.name}
+            </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           <Group position={"apart"}>
-            <Text>Дата записи:</Text>
-            <Text color={"#B49284"}>
+            <Text size={"xl"}>Дата записи:</Text>
+            <Text size={"xl"} color={"#B49284"}>
               {dayjs(item.date).locale("ru").format("D MMMM в HH:00")}
             </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           <Group position={"apart"}>
-            <Text>Имя клиента:</Text>
+            <Text size={"xl"}>Имя клиента:</Text>
 
-            <Text color={"#B49284"}>{item.user.username}</Text>
+            <Text size={"xl"} color={"#B49284"}>
+              {item.user.username}
+            </Text>
           </Group>
           <Divider mb={"xl"} mt={-3} variant={"dashed"} />
           {!item.canceled && (
