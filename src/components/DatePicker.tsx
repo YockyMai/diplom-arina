@@ -26,7 +26,9 @@ export const MyDatePicker: FC<Props> = ({
   setSelectedTimeId,
   selectedTimeId,
 }) => {
-  const sortedTime = days[0].times.sort((a, b) => {
+  const sortedTime = (
+    days.find((el) => el.id === selectedDayId) || days[0]
+  ).times.sort((a, b) => {
     const timeA = a.time.split(":"); // Разделяем строку по двоеточию
     const timeB = b.time.split(":");
 
@@ -44,30 +46,33 @@ export const MyDatePicker: FC<Props> = ({
     // Если часы равны, сравниваем минуты
     return minuteA - minuteB;
   });
+  console.log(sortedTime);
   const [times, setTimes] = useState<Time[]>(sortedTime);
-
-  useEffect(() => {
-    const selectedDay = days.find((day) => day.id === selectedDayId) || days[0];
-    const sortedTime = selectedDay.times.sort((a, b) => {
-      const timeA = a.time.split(":"); // Разделяем строку по двоеточию
-      const timeB = b.time.split(":");
-
-      const hourA = parseInt(timeA[0]); // Преобразуем часы в число
-      const hourB = parseInt(timeB[0]);
-
-      const minuteA = parseInt(timeA[1]); // Преобразуем минуты в число
-      const minuteB = parseInt(timeB[1]);
-
-      // Сравниваем часы
-      if (hourA !== hourB) {
-        return hourA - hourB;
-      }
-
-      // Если часы равны, сравниваем минуты
-      return minuteA - minuteB;
-    });
-    setTimes(sortedTime);
-  }, [selectedDayId]);
+  //
+  // useEffect(() => {
+  //   const selectedDay = days.find((day) => day.id === selectedDayId);
+  //   // console.log(selectedDay);
+  //   const sortedTime = selectedDay?.times.sort((a, b) => {
+  //     const timeA = a.time.split(":"); // Разделяем строку по двоеточию
+  //     const timeB = b.time.split(":");
+  //
+  //     const hourA = parseInt(timeA[0]); // Преобразуем часы в число
+  //     const hourB = parseInt(timeB[0]);
+  //
+  //     const minuteA = parseInt(timeA[1]); // Преобразуем минуты в число
+  //     const minuteB = parseInt(timeB[1]);
+  //
+  //     // Сравниваем часы
+  //     if (hourA !== hourB) {
+  //       return hourA - hourB;
+  //     }
+  //
+  //     // Если часы равны, сравниваем минуты
+  //     return minuteA - minuteB;
+  //   });
+  //
+  //   sortedTime && setTimes(sortedTime);
+  // }, [selectedDayId]);
 
   const onDayChange = (dayId: number) => {
     setSelectedTimeId(null);
